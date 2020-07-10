@@ -1,0 +1,20 @@
+
+#container-perfil{
+    padding: 20px;
+   
+}
+
+#fotoperfil{
+  display: block;
+  margin: auto;
+  width: 200px;
+}
+
+.card{
+    padding: 20px;
+}
+
+.table{
+width: 100%;
+}
+
