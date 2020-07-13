@@ -38,7 +38,7 @@
                            INICIOS DE SESIÓN
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('admin.login') }}">Ir a inicio de sesión admintrador</a>
+                            <a href="{{ route('admin.login') }}">Ir a tu corazón</a>
                             <br>
                             <a href="{{ route('alumno.login') }}">Ir a inicio de sesión alumno</a>
                             <br>
