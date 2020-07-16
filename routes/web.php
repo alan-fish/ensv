@@ -35,6 +35,10 @@ Route::get('/admin/list', 'Admin\AdminController@list')->name('admin.list');
 //Editar
 Route::get('/admin/{id}/edit-docente', 'Admin\AdminController@edit_docente')->name('admin.edit_docente');
 Route::put('/admin/{id}/edit-docente', 'Admin\AdminController@update_docente')->name('admin.update_docente');
+//Horario
+Route::get('/admin/horario', 'Admin\AdminController@horario')->name('admin.horario');
+//Consultar horario
+Route::get('/admin/consultarhorario', 'Admin\AdminController@consultarhorario')->name('admin.consultarhorario');
 
 
 // Alumno

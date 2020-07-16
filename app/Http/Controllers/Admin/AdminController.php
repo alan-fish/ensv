@@ -156,4 +156,17 @@ class AdminController extends Controller
         $docentes = Docente::findOrFail($id);
         return view('/admin/edit-docente',compact('message'))->with('docentes', $docentes);
     }
+
+    public function horario()
+    {
+        return view ('/admin/horario');
+    }
+
+    public function consultarhorario()
+    {
+        return view ('/admin/consultarhorario');
+    }
+
+
 }
+

@@ -46,7 +46,7 @@
                     <b>  HORARIO </b>
                     </a>
                     <div class="dropdown-menu">
-                        <a id="link-dropdown" class="nav-link" href="{{ route('admin.consultarhorario') }}">
+                        <a id="link-dropdown" class="nav-link" href="#">
                         <i class="fas fa-sign-in-alt"></i> Consultar horarios</a>
                         <a id="link-dropdown" class="nav-link" href="{{ route('admin.horario') }}">
                         <i class="fas fa-sign-in-alt"></i>Crear horario</a>
@@ -76,77 +76,102 @@
 
      <div class="container" id="container_menu">
 
-        <div class="card-deck mb-3 text-center">
+        <div>
 
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>DOCENTES</b></h4>
+              <h4 class="my-0 font-weight-normal"><b>CONSULTAR HORARIO</b></h4>
             </div>
             <br>
             <div class="card-body">
-               <img id="imagen-card"  src="{{ URL::to('assets\img\docentes.png') }}" class ="img-fluid" alt="">
-               <a id="button_a"class="btn btn-lg btn-block" href="{{ route('admin.list') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i>Consultar docente
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.createdocente') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar docente
-               </a>
-            </div>
-          </div>
 
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>ALUMNOS</b></h4>
-            </div>
-            <div class="card-body">
-                <img id="imagen-card1"  src="{{ URL::to('assets\img\grupos.png') }}" class ="img-fluid" alt=""> 
-                <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.lista') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar alumno
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.create') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar alumno
-               </a>
-            </div>
-          </div>
+            <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />
 
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
-            </div>
-            <div class="card-body">
-                <img id="imagen-card2" src="{{ URL::to('assets\img\crear horario.png') }}" class ="img-fluid" alt=""> 
-                <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.consultarhorario') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar horario
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block " href="{{ route('admin.horario') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Crear horario
-               </a>
-            </div>
-          </div>
 
+
+
+
+
+            
+<form action="">
+
+            <div id= "">
+<label><select style="width:280px" class="select-css" id="ciclo" onchange="ciclo();">
+<option selected="true" disabled="disabled">Seleccione ciclo escolar...</option>
+<option>Ago20-Dic20</option>
+<option>Ene21-Jun21</option>
+<option>Ago21-Dic21</option>
+<option>Ene22-Jun22</option>
+<option>Ago22-Dic22</option>
+<option>Ene23-Jun23</option>
+<option>Ago23-Dic23</option>
+</select></label>
+</div>
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="grupo" onchange="grupo();">
+<option selected="true" disabled="disabled">Seleccione un grupo...</option>
+<option></option>
+</select></label>
+</div>
+
+<input type="submit"  class="btn btn-lg btn-block btn-primary"   value="Consultar">
+</form>
+
+
+
+
+
+            <div class=""  id="contenedor">
+    <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
+    <label for="tab-1" class="tab-label-1">Lunes</label>
+    
+    <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
+    <label for="tab-2" class="tab-label-2">Martes</label>
+    
+    <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
+    <label for="tab-3" class="tab-label-3">Miercoles</label>
+    
+    <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
+    <label for="tab-4" class="tab-label-4">Jueves</label>
+
+    <input id="tab-5" type="radio" name="radio-set" class="tab-selector-5" />
+    <label for="tab-5" class="tab-label-5">Viernes</label>
+
+    
+                            
+    <div class="content">
+
+        <div class="content-1">
+            Horario de lunes
         </div>
 
-        <div class="container text-center" id="container_menu">
-          <div class="row justify-content-md-center">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                  <div class="card-header">
-                    <h4 class="my-0 font-weight-normal"><b>Evaluación doncetes</b></h4>
-                  </div>
-                  <div class="card-body text-center">
-                      <img id="imagen-card3" src="{{ URL::to('assets\img\evaluacion.png') }}" class ="img-fluid" alt=""> 
-                      <a id="button_a" class="btn btn-lg btn-block " href="" role="button">
-                      <i class="fas fa-sign-in-alt"></i> Preguntas
-                    </a>
-                    <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-                    <i class="fas fa-sign-in-alt"></i> Consultar
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="content-2">
+            Horario de martes
         </div>
+
+        <div class="content-3">
+            Horario de miercoles
+        </div>
+
+        <div class="content-4">
+            Horario de jueves
+        </div>
+
+        <div class="content-5">
+            Horario de viernes
+        </div>
+
+    </div>
+
+<br>
+
+    <div>
+<a class="btn btn-lg btn-block btn-primary" href="{{ route('admin.horario') }}">Regresar</a> <br></br>
+</div>
+
+
+
 
 
 @endsection

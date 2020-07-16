@@ -48,7 +48,7 @@
                     <div class="dropdown-menu">
                         <a id="link-dropdown" class="nav-link" href="{{ route('admin.consultarhorario') }}">
                         <i class="fas fa-sign-in-alt"></i> Consultar horarios</a>
-                        <a id="link-dropdown" class="nav-link" href="{{ route('admin.horario') }}">
+                        <a id="link-dropdown" class="nav-link" href="#">
                         <i class="fas fa-sign-in-alt"></i>Crear horario</a>
                     </div>
                 </li>
@@ -76,77 +76,128 @@
 
      <div class="container" id="container_menu">
 
-        <div class="card-deck mb-3 text-center">
-
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>DOCENTES</b></h4>
-            </div>
-            <br>
-            <div class="card-body">
-               <img id="imagen-card"  src="{{ URL::to('assets\img\docentes.png') }}" class ="img-fluid" alt="">
-               <a id="button_a"class="btn btn-lg btn-block" href="{{ route('admin.list') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i>Consultar docente
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.createdocente') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar docente
-               </a>
-            </div>
-          </div>
-
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>ALUMNOS</b></h4>
-            </div>
-            <div class="card-body">
-                <img id="imagen-card1"  src="{{ URL::to('assets\img\grupos.png') }}" class ="img-fluid" alt=""> 
-                <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.lista') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar alumno
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.create') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar alumno
-               </a>
-            </div>
-          </div>
+        <div>
 
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
             </div>
+            <br>
             <div class="card-body">
-                <img id="imagen-card2" src="{{ URL::to('assets\img\crear horario.png') }}" class ="img-fluid" alt=""> 
-                <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.consultarhorario') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar horario
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block " href="{{ route('admin.horario') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Crear horario
-               </a>
-            </div>
-          </div>
+            <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />
+            <script src="{{ asset('js/horariojs.js') }}"></script>
 
-        </div>
 
-        <div class="container text-center" id="container_menu">
-          <div class="row justify-content-md-center">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                  <div class="card-header">
-                    <h4 class="my-0 font-weight-normal"><b>Evaluación doncetes</b></h4>
-                  </div>
-                  <div class="card-body text-center">
-                      <img id="imagen-card3" src="{{ URL::to('assets\img\evaluacion.png') }}" class ="img-fluid" alt=""> 
-                      <a id="button_a" class="btn btn-lg btn-block " href="" role="button">
-                      <i class="fas fa-sign-in-alt"></i> Preguntas
-                    </a>
-                    <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-                    <i class="fas fa-sign-in-alt"></i> Consultar
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+            
+
+
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="ciclo" onchange="ciclo();">
+<option selected="true" disabled="disabled">Seleccione ciclo escolar...</option>
+<option>Ago20-Dic20</option>
+<option>Ene21-Jun21</option>
+<option>Ago21-Dic21</option>
+<option>Ene22-Jun22</option>
+<option>Ago22-Dic22</option>
+<option>Ene23-Jun23</option>
+<option>Ago23-Dic23</option>
+</select></label>
+</div>
+
+
+
+
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="grupo" onchange="grupo();">
+<option selected="true" disabled="disabled">Seleccione un grupo...</option>
+<option></option>
+</select></label>
+</div>
+
+
+
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="dia" onchange="dia();">
+<option selected="true" disabled="disabled">Seleccione un dia...</option>
+<option>Lunes</option>
+<option>Martes</option>
+<option>Miercoles</option>
+<option>Jueves</option>
+<option>Viernes</option>
+</select></label>
+</div>
+
+
+
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="hora" onchange="hora();">
+<option selected="true" disabled="disabled">Seleccione un horario...</option>
+<option>8:00-10:00</option>
+<option>10:30-12:30</option>
+<option>12:30-14:30</option>
+<option>15:00-17:00</option>
+</select></label>
+</div>
+      
+
+
+        
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="docente" onchange="docente();">
+<option selected="true" disabled="disabled">Seleccione un docente...</option>
+<option></option>
+</select></label>
+</div>
+
+
+
+
+
+<div id= "">
+<label><select style="width:280px" class="select-css" id="materia" onchange="materia();">
+<option selected="true" disabled="disabled">Seleccione una materia...</option>
+<option></option>
+</select></label>
+</div>
+
+
+<br>
+
+<form action="" method="">
+
+<h6> CICLO ESCOLAR: <input style="auto" name="cic"  type="text" id="ciclos" style="background-color:transparent"   readonly /></h6> 
+
+<h6> GRUPO: <input style="width:auto" name="gru"  type="text" id="grupos" style="background-color:transparent"   readonly /></h6> 
+
+<h6> DIA: <input style="width:auto" name="di"  type="text" id="dias" style="background-color:transparent"   readonly /></h6> 
+
+<h6> HORA: <input style="width:auto" name="hor"   type="text" id="horas" style="background-color:transparent"  readonly /></h6>
+
+<h6> DOCENTE: <input style="width:auto" name="doc"   type="text" id="docentes" style="background-color:transparent"   readonly /></h6>
+
+<h6> MATERIA: <input style="width:auto" name="mat"  type="text" id="materias" style="background-color:transparent"   readonly /></h6>
+
+<br>
+
+<input type="submit"  class="btn btn-lg btn-block btn-primary"   value="Asignar">
+
+<br>
+
+</form>
+
+
+<div>
+<a class="btn btn-lg btn-block btn-primary" href="{{ route('admin.consultarhorario') }}">Consultar horario</a> <br></br>
+</div>
+<div>
+
+
 
 
 @endsection
