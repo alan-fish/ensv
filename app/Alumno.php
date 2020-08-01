@@ -13,7 +13,7 @@ class Alumno  extends Authenticatable
     protected $guard = 'alumno';
 
     protected $fillable = [
-        'apellido1', 'apellido2', 'nombre', 'matricula', 'sexo', 'curp', 'licenciatura','grupo',
+        'apellido1', 'apellido2', 'nombre', 'matricula', 'sexo', 'curp', 'licenciatura','grupo_id',
         'email', 'password', 
     ];
 
@@ -34,6 +34,7 @@ class Alumno  extends Authenticatable
             return $query->where ('grupo', 'LIKE', "%$grupo%");
         }
     }
+    
     public function scopeMatriculas($query, $matricula)
     {
         if($matricula)

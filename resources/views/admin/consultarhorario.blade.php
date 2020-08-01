@@ -74,103 +74,101 @@
      </nav>
 
 
-     <div class="container" id="container_menu">
+<div class="container" id="container-resgistrodocente">
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
+      <div class="card-header">
+          <h2><b>CONSULTAR HORARIO</b></h2>
+          <div class="card-body">
+             <nav>
+                <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.consultarhorario') }}">
+              
 
-        <div>
+                <div id= "">
+                <label>
+                <select name="carrera" style="width:280px" class="select-css" >
+                    <option selected="true" disabled="disabled">Selecciona la licenciatura</option>
+                    @foreach($licenciaturas as $licenciatura)
+                       <option value="{{$licenciatura->id}}">
+                       {{$licenciatura->carrera}}
+                        </option>
+                    @endforeach
+                </select></label>
+                </div>
 
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>CONSULTAR HORARIO</b></h4>
-            </div>
+                <div id= "">
+                    <label>
+                    <select name="c" style="width:280px" class="select-css">
+                    <option selected="true" disabled="disabled">Selecciona el ciclo escolar</option>
+                    @foreach($ciclos as $ciclo)
+                       <option value="{{$ciclo->id}}">
+                       {{$ciclo->ciclo}}
+                        </option>
+                    @endforeach
+                    </select></label>
+                </div>
+        
+                <div id= "">
+                    <label>
+                    <select name="g" style="width:280px" class="select-css">
+                        <option selected="true" disabled="disabled">Selecciona el grupo...</option>
+                        @foreach($grupos as $grupo)
+                        <option value="{{$grupo->id}}">
+                        {{$grupo->grupo}}
+                            </option>
+                        @endforeach
+                    </select></label>
+                </div>
+
+                    <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </form>
+            </nav>
             <br>
-            <div class="card-body">
+            <br>
+            <br>
+            <br>
+@if(isset($horarios)) 
+    <table class="table-responsive table table-hover">
+    @foreach($horarios as $horario)
+                    <tbody>     
+               
+                     <tr>
+                            <td>
+                            {{$horario->carrera}}  
+                            </td>
+                            <td>
+                            {{$horario->ciclo}}  
+                            </td>
+                            <td>
+                            {{$horario->grupo}}  
+                            </td>
+                            <td>
+                            {{ $horario->dia}}  
+                            </td>
+                            <td>
+                            {{ $horario->hora}}  
+                            </td>
+                            <td>
+                            {{ $horario->materia}}  
+                            </td>
+                            <td>
+                            {{ $horario->apellido1}}
+                            {{ $horario->apellido2}}
+                            {{ $horario->nombre}}      
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+            </table>  
 
-            <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />
-
-
-
-
-
-
-            
-<form action="">
-
-            <div id= "">
-<label><select style="width:280px" class="select-css" id="ciclo" onchange="ciclo();">
-<option selected="true" disabled="disabled">Seleccione ciclo escolar...</option>
-<option>Ago20-Dic20</option>
-<option>Ene21-Jun21</option>
-<option>Ago21-Dic21</option>
-<option>Ene22-Jun22</option>
-<option>Ago22-Dic22</option>
-<option>Ene23-Jun23</option>
-<option>Ago23-Dic23</option>
-</select></label>
-</div>
-
-<div id= "">
-<label><select style="width:280px" class="select-css" id="grupo" onchange="grupo();">
-<option selected="true" disabled="disabled">Seleccione un grupo...</option>
-<option></option>
-</select></label>
-</div>
-
-<input type="submit"  class="btn btn-lg btn-block btn-primary"   value="Consultar">
-</form>
-
-
-
-
-
-            <div class=""  id="contenedor">
-    <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
-    <label for="tab-1" class="tab-label-1">Lunes</label>
-    
-    <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
-    <label for="tab-2" class="tab-label-2">Martes</label>
-    
-    <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
-    <label for="tab-3" class="tab-label-3">Miercoles</label>
-    
-    <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
-    <label for="tab-4" class="tab-label-4">Jueves</label>
-
-    <input id="tab-5" type="radio" name="radio-set" class="tab-selector-5" />
-    <label for="tab-5" class="tab-label-5">Viernes</label>
-
-    
-                            
-    <div class="content">
-
-        <div class="content-1">
-            Horario de lunes
+            @endif 
         </div>
-
-        <div class="content-2">
-            Horario de martes
-        </div>
-
-        <div class="content-3">
-            Horario de miercoles
-        </div>
-
-        <div class="content-4">
-            Horario de jueves
-        </div>
-
-        <div class="content-5">
-            Horario de viernes
-        </div>
-
+      </div>
     </div>
-
-<br>
-
-    <div>
-<a class="btn btn-lg btn-block btn-primary" href="{{ route('admin.horario') }}">Regresar</a> <br></br>
+  </div>
 </div>
-
-
 
 
 

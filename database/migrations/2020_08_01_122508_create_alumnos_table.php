@@ -22,7 +22,12 @@ class CreateAlumnosTable extends Migration
             $table->text('sexo');
             $table->text('curp');
             $table->text('licenciatura');
-            $table->text('grupo');
+            
+            $table->unsignedBigInteger('grupo_id');
+            $table->foreign('grupo_id')->references('id')->on('grupos')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->string('email',30);
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('changedpassword')->default(0);

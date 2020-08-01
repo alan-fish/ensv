@@ -40,5 +40,11 @@ class Docente  extends Authenticatable
             return $query->where ('estado', 'LIKE', "%$estado%");
         }
     }
+
+    
+    public function horario()
+    {
+        return $this->belongsTo('App\Horario', 'docente_id');
+    }
     
 } 

@@ -73,6 +73,7 @@
     
 
 <div class="container" id="container-resgistrodocente">
+<script src="{{ asset('js/show_form.js') }}"></script>
   <div class="row justify-content-md-center">
     <div class="col-md-10">
         @isset($message)
@@ -81,7 +82,7 @@
                  <strong>{{$message}}</strong>
             </div>
         @endif
-      <div class="card-header">
+      
       <h3 style="font-weight: bold">REGISTRAR DOCENTE</h3>          
             <div class="card-body">
 
@@ -121,34 +122,52 @@
                 <div id="div_registro" class="form-group row">
                   <label for="fecha_ingreso" class="col-form-label col-sm-4">Fecha de ingreso:</label>
                   <div class="col-sm-8">
-                    <input id="registro-input" class="form-control" type="text" name="fecha_ingreso" placeholder="YYYY-MM-DD">
+                    <input id="registro-input" class="form-control" type="text" name="fecha_ingreso" placeholder="AAA-MM-DD">
                   </div>
                 </div>
-
-                <div id="div_registro" class="form-group row">
-                    <label for="licenciatura" class="col-form-label col-sm-4">Licenciaturas:</label>
-                    <div class="col-sm-8">
-                        <input id="registro-input" class="form-control" type="text" name="licenciatura"  placeholder="Licenciatura 1">
-                        <input id="registro-input" class="form-control" type="text" name="licenciatura1" placeholder="Licenciatura 2">
-                        <input id="registro-input" class="form-control" type="text" name="licenciatura2" placeholder="Licenciatura 3">
+                
+                <div id="div_registro"  class="form-group row">
+                <label for="licenciatura" class="col-form-label col-sm-4"></label>    
+                    <div  class="col-sm-8">
+                    <select onChange="mostrarDiv(this.value);" class="custom-select">
+                        <option value="">Selecciona que campos quieres llenar...</option>
+                        <option value="licenciatura">Colocar Licenciaturas</option>
+                        <option value="maestria">Colocar Maestrías</option>
+                        <option value="doctorado">Colocar Doctorados</option>
+                     </select>
                     </div>
                 </div>
 
-                <div id="div_registro" class="form-group row">
-                    <label for="maestria" class="col-form-label col-sm-4">Maestrías: </label>
-                    <div class="col-sm-8">
-                        <input id="registro-input" class="form-control" type="text" name="maestria"  placeholder="Maestría 1">
-                        <input id="registro-input" class="form-control" type="text" name="maestria1" placeholder="Maestría 2">
-                        <input id="registro-input" class="form-control" type="text" name="maestria2" placeholder="Maestría 3">
+                <div id="licenciatura" style="display: none;">
+                    <div id="div_registro" class="form-group row">
+                        <label for="licenciatura" class="col-form-label col-sm-4">Licenciaturas:</label>
+                        <div class="col-sm-8">
+                            <input id="registro-input" class="form-control" type="text" name="licenciatura"  placeholder="Licenciatura 1">
+                            <input id="registro-input" class="form-control" type="text" name="licenciatura1" placeholder="Licenciatura 2">
+                            <input id="registro-input" class="form-control" type="text" name="licenciatura2" placeholder="Licenciatura 3">
+                        </div>
                     </div>
                 </div>
 
-                <div id="div_registro" class="form-group row">
-                    <label for="doctorado" class="col-form-label col-sm-4">Doctorados:</label>
-                    <div class="col-sm-8">
-                        <input id="registro-input" class="form-control" type="text" name="doctorado"  placeholder="Doctorado 1">
-                        <input id="registro-input" class="form-control" type="text" name="doctorado1" placeholder="Doctorado 2">
-                        <input id="registro-input" class="form-control" type="text" name="doctorado2" placeholder="Doctorado 3">
+                <div id="maestria" style="display: none;">
+                    <div id="div_registro" class="form-group row">
+                        <label for="maestria" class="col-form-label col-sm-4">Maestrías: </label>
+                        <div class="col-sm-8">
+                            <input id="registro-input" class="form-control" type="text" name="maestria"  placeholder="Maestría 1">
+                            <input id="registro-input" class="form-control" type="text" name="maestria1" placeholder="Maestría 2">
+                            <input id="registro-input" class="form-control" type="text" name="maestria2" placeholder="Maestría 3">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="doctorado" style="display: none;">
+                    <div id="div_registro" class="form-group row">
+                        <label for="doctorado" class="col-form-label col-sm-4">Doctorados:</label>
+                        <div class="col-sm-8">
+                            <input id="registro-input" class="form-control" type="text" name="doctorado"  placeholder="Doctorado 1">
+                            <input id="registro-input" class="form-control" type="text" name="doctorado1" placeholder="Doctorado 2">
+                            <input id="registro-input" class="form-control" type="text" name="doctorado2" placeholder="Doctorado 3">
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +175,7 @@
                     <label for="tipo_de_contratacion" class="col-form-label col-sm-4">Tipo de contratación:</label>
                     <div class="col-sm-8">
                         <select id="tipo_de_contratacion" class="custom-select" 
-                        name="tipo_de_contratacion" onchange="ShowSelected();">
+                                name="tipo_de_contratacion" onchange="ShowSelected();">
                             <option>Seleecione una opción</option>
                             <option value="Medio tiempo">Medio Tiempo</option>
                             <option value="Tiempo completo">Tiempo Completo</option>
@@ -188,12 +207,10 @@
                 <div id="div_registro" class="form-group row">
                     <button id="button_registro" class="btn btn-outline-primary col-sm-6" type="submit">
                          <i class="fas fa-user-plus"></i>  Registrar
-                        </button>
-                    <div class="col-md-6">                  
-                        <a  id="button_cancelar" class=" form-control btn btn-outline-danger"  href="{{ route('admin.menu') }}" role="button">
+                        </button>         
+                        <a  id="button_cancelar" class=" form-control btn btn-outline-danger col-sm-6"  href="{{ route('admin.menu') }}" role="button">
                         <i class="fas fa-window-close"></i>  Cancelar
-                        </a>
-                    </div>      
+                        </a> 
                 </div>
 
                 </form>

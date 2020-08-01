@@ -80,19 +80,17 @@
 <div class="container" id="container-resgistroalumno">
   <div class="row justify-content-md-center">
     <div class="col-sm-10">
-        @isset($message)
+         @isset($message)
             <div class="alert alert-success alert-dismissible fade show">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                  <strong>{{$message}}</strong>
             </div>
-        @endif
-      <div id="card_header_registro" class="card-header">
-          <h3 style="font-weight: bold">REGISTRAR ALUMNO</h3>          
-            <div class="card-body">
+          @endif
+                    <h3 style="font-weight: bold">REGISTRAR ALUMNO</h3>          
+                    <div class="card-body">
 
-                @include ('layouts.error')
-
-                <form method="post" action="{{ route('admin.store') }}">
+                        @include ('layouts.error')
+                        <form method="post" action="{{ route('admin.store') }}">
                   {{ csrf_field() }}
                  
                         <div id="div_registro" class="form-group row">
@@ -179,19 +177,16 @@
 
                 <div id="div_registro" class="form-group row">
                     <button id="button_registro" class="btn btn-outline-primary col-sm-6" type="submit">
-                     <i class="fas fa-user-plus"></i> Registrar registrar
-                    </button>
-                    <div class="col-md-6">                  
-                        <a  id="button_cancelar" class=" form-control btn btn-outline-danger"  href="{{ route('admin.menu') }}" role="button">
-                        <i class="fas fa-window-close"></i>   Cancelar
-                        </a>
-                    </div>      
+                         <i class="fas fa-user-plus"></i>  Registrar
+                        </button>         
+                        <a  id="button_cancelar" class=" form-control btn btn-outline-danger col-sm-6"  href="{{ route('admin.menu') }}" role="button">
+                        <i class="fas fa-window-close"></i>  Cancelar
+                        </a> 
                 </div>
     
                 </form>
-
+                    </div>
             </div>
-      </div>
     </div>
   </div>
 </div>

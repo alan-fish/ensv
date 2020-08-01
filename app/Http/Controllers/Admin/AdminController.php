@@ -12,6 +12,11 @@ use App\Http\Requests\AdminDocenteRequest;
 use App\Docente;
 use App\Alumno;
 use App\Admin;
+use App\Ciclo;
+use App\Grupo;
+use App\Materia;
+use App\Horario;
+use App\Licenciatura;
 
 class AdminController extends Controller
 {
@@ -146,7 +151,9 @@ class AdminController extends Controller
        
         return view('/admin/edit-docente')->with('docentes', $docentes);
     }
-/*Tenque hacer el request para este metodo*/
+
+/*Tengo que hacer el request para este metodo*/
+
     public function  update_docente(Request $request, $id)
     {
         $datos_docente= request()->except(['_token', '_method', 'password']);
@@ -157,16 +164,65 @@ class AdminController extends Controller
         return view('/admin/edit-docente',compact('message'))->with('docentes', $docentes);
     }
 
+//Horarios
+
     public function horario()
     {
-        return view ('/admin/horario');
+        $licenciaturas = Licenciatura::all();
+        $ciclos = Ciclo::all();
+        $grupos = Grupo::all();
+        //$materias = Materia::all();
+        $docentes = Docente::all();
+
+        return view ('admin.horario')->with(['licenciaturas'=> $licenciaturas, 'ciclos'=> $ciclos, 'grupos' => $grupos,
+                                             'docentes' => $docentes]);
+     
     }
 
-    public function consultarhorario()
-    {
-        return view ('/admin/consultarhorario');
+    public function getMaterias($licenciaturas_id){
+    
+        return Materia::where('licenciatura_id', $licenciaturas_id)->get();
+ 
     }
 
+    public function createhorario(Request $request)
+    {   
+
+        $horario = request()->all();
+        
+           horario::create([
+           'licenciatura_id' => $horario ['licenciatura_id'],
+           'ciclo_id' => $horario ['ciclo_id'],
+           'grupo_id' => $horario ['grupo_id'],
+           'dia' => $horario ['dia'],
+           'hora' => $horario ['hora'],
+           'materia_id' => $horario ['materia_id'],
+           'docente_id' => $horario ['docente_id'],
+           ]);
+
+        return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
+    }
+
+    public function consultarhorario(Request $request)
+    {   
+        $ciclos = Ciclo::all();
+        $grupos = Grupo::all();
+        $licenciaturas = Licenciatura::all();
+
+          $cic =$request->get('c');
+          $grp =$request->get('g');
+          $carrera =$request->get('carrera');
+
+        if((isset ($cic)) && (isset ($grp)) && (isset ($carrera)) ){
+        $data = [$cic, $grp, $carrera];
+        $horarios = Horario::horarios($data)->paginate(10);
+        return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])->with('horarios', $horarios);
+        }
+        else{
+            return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas]);
+        }
+        
+    }
 
 }
 
