@@ -37,7 +37,7 @@ Route::get('/admin/{id}/edit-docente', 'Admin\AdminController@edit_docente')->na
 Route::put('/admin/{id}/edit-docente', 'Admin\AdminController@update_docente')->name('admin.update_docente');
 //Rutas para la creación de los horarios
 //crear
-Route::get('/admin/materias/{id}', 'Admin\AdminController@getMaterias');
+Route::get('/admin/materias/{id}/{string}', 'Admin\AdminController@getMaterias');
 Route::get('/admin/horario', 'Admin\AdminController@horario')->name('admin.horario');
 Route::post('/admin/horario', 'Admin\AdminController@createhorario')->name('admin.horario_store');
 //Consultar horario

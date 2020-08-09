@@ -179,9 +179,11 @@ class AdminController extends Controller
      
     }
 
-    public function getMaterias($licenciaturas_id){
-    
-        return Materia::where('licenciatura_id', $licenciaturas_id)->get();
+    public function getMaterias($licenciaturas_id,$semestre ){
+
+        return Materia::where('licenciatura_id', $licenciaturas_id)
+                        ->where('semestre', $semestre)
+                        ->get();
  
     }
 

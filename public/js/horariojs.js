@@ -42,7 +42,6 @@ function ciclo() {
     document.getElementById("ciclos_valor").value = displayvalue;
 }
 
-
 $(document).ready(function(){
 function licenciatura(){
         var d = document.getElementById("licenciatura");
@@ -51,10 +50,13 @@ function licenciatura(){
         document.getElementById("lic").value = displaytext;
         document.getElementById("lic_valor").value = displayvalue;
 
-        $('#licenciatura').change(function(){
-        var licenciaturas_id = $(this).val();
+        $('#semestre').change(function(){
+        var licenciaturas_id = $('#licenciatura').val();
+        var semestre = $('#semestre').val();
+        var array = [licenciaturas_id, semestre ];
+        console.log(array);
         if ($.trim(licenciaturas_id) != '') { 
-            $.get('/admin/materias/'+licenciaturas_id, function(materias){
+            $.get('/admin/materias/'+licenciaturas_id+'/'+semestre, function(materias){
                 $('#materia').empty();
                 var materia_select = '<option value="">Seleccione una materia</option>'
                     for (var i=0; i<materias.length;i++)
@@ -66,5 +68,7 @@ function licenciatura(){
         });
 }
 licenciatura();
-$('#licenciatura').change(licenciatura);
+$('#semestre').change(licenciatura);
 });
+
+//click="licenciatura();" onchange="ciclo();"

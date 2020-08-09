@@ -75,10 +75,10 @@
 
 
 <div class="container" id="container-resgistroalumno">
-  
+    <body oncontextmenu="return false" onkeydown="return false">
     <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />
     <script src="{{ asset('js/horariojs.js') }}"></script>
-   
+    <nav>
 
 
     <div class="row justify-content-md-center">
@@ -93,115 +93,113 @@
             <div class="card-header">
             <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
             @include ('layouts.error')
+
+
+            
             </div>
             
             <div class="card-body">
-                
-                  <div id="div_registro" class="form-group row">
-                        <label for="licenciatura" class="col-form-label col-md-4">Selecciona una licenciatura</label>
-                         <div class="col-md-8">
-                        <label>  
-                        <select style="width:280px" class="select-css" id="licenciatura" >
-                            <option selected="true" disabled="disabled"></option>
-                            @foreach($licenciaturas as $licenciatura)
-                            <option value="{{$licenciatura->id}}">
-                            {{$licenciatura->carrera}}
-                                </option>
-                            @endforeach
-                        </select></label>
-                        </div>
+            <nav>
+                <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.horario') }}">
+              
 
-                    </div>
+                <div id= "">
+                <label>
+                <select name="lic" style="width:280px" class="select-css" >
+                    <option selected="true" disabled="disabled">Selecciona la licenciatura</option>
+                    @foreach($licenciaturas as $licenciatura)
+                       <option value="{{$licenciatura->id}}">
+                       {{$licenciatura->carrera}}
+                        </option>
+                    @endforeach
+                </select></label>
+                </div>
+                <div id= "">
+                    <label>
+                    <select name="semestre" style="width:280px" class="select-css">
+                        <option selected="true" disabled="disabled">Selecciona el semestre...</option>
+                        <option value='Primero'> Primero </option>
+                        <option value='Segundo'> Segundo </option>
+                        <option value='Tercero'> Tercero </option>
+                        <option value='Cuarto'> Cuarto </option>
+                        <option value='Quinto'> Quinto </option>
+                        <option value='Sexto'> Sexto </option>
+                        <option value='Septimo'> Séptimo </option>
+                        <option value='Octavo'> Octavo </option>
+                        <option value='Noveno'> Noveno </option>
+                    </select></label>
+                </div>
 
-                    <div id="div_registro" class="form-group row">
-                        <label for="semestre" class="col-form-label col-md-4">Selecciona un semestre</label>
-                        <div class="col-sm-8">
-                        <label>
-                        <select style="width:280px" class="select-css" id="semestre" >
-                            <option selected="true" disabled="disabled">Semestre</option>
-                            <option value="Primero">Primer semestre</option>
-                            <option value="Segundo">Segundo semestre</option>
-                            <option value="Tercero">Tercer semestre</option>
-                        </select></label>
-                        </div>
-
-                    </div>
-
-
-            <div id="div_registro" class="form-group row">
-                <label for="ciclo" class="col-form-label col-md-4">Selecciona el ciclo</label>
-                <div class="col-md-8">
+                    <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </form>
+            </nav>
+            
+            @if(isset($materias)) 
+            <div id= "">
                 <label>
                 <select name="ciclo_id" style="width:280px" class="select-css" id="ciclo" onchange="ciclo();">
-                    <option selected="true" disabled="disabled">Ciclo...</option>
+                    <option selected="true" disabled="disabled">Seleccione ciclo escolar</option>
                     @foreach($ciclos as $ciclo)
                        <option value="{{$ciclo->id}}">
                        {{$ciclo->ciclo}}
                         </option>
                     @endforeach
                 </select></label>
-                </div>
             </div>
     
-            <div id="div_registro" class="form-group row">
-                <label for="grupo" class="col-form-label col-md-4">Selecciona un grupo</label>
-                <div class="col-md-8">
+            <div id= "">
                 <label>
                 <select name="grupo_id" style="width:280px" class="select-css" id="grupo" onchange="grupo();">
-                    <option selected="true" disabled="disabled">Grupos ...</option>
+                    <option selected="true" disabled="disabled">Seleccione un grupo...</option>
                     @foreach($grupos as $grupo)
                        <option value="{{$grupo->id}}">
                        {{$grupo->grupo}}
                         </option>
                     @endforeach
                 </select></label>
-                </div>
             </div>
 
-            <div  id="div_registro" class="form-group row">
-                 <label for="dia" class="col-form-label col-md-4">Selecciona el día</label>
-                 <div class="col-md-8">
-                 <label>
-                 <select name='dia' style="width:280px" class="select-css" id="dia" onchange="dia();">
-                    <option selected="true" disabled="disabled">Día ...</option>
+            <div id= "">
+                <label>
+                <select name='dia' style="width:280px" class="select-css" id="dia" onchange="dia();">
+                    <option selected="true" disabled="disabled">Seleccione un dia...</option>
                     <option>Lunes</option>
                     <option>Martes</option>
                     <option>Miercoles</option>
                     <option>Jueves</option>
                     <option>Viernes</option>
                 </select></label>
-                </div>
             </div>
 
-            <div id="div_registro" class="form-group row">
-                <label for="hora" class="col-form-label col-md-4">Selecciona la hora</label>
-                <div class="col-md-8">
+            <div id= "">
                 <label>
-                <select  style="width:280px" class="select-css" id="hora" onchange="hora();">
-                    <option selected="true" disabled="disabled">Horas...</option>
+                <select name='dia' style="width:280px" class="select-css" id="hora" onchange="hora();">
+                    <option selected="true" disabled="disabled">Seleccione un horario...</option>
                     <option>8:00-10:00</option>
                     <option>10:30-12:30</option>
                     <option>12:30-14:30</option>
                     <option>15:00-17:00</option>
                 </select></label>
-                </div>
             </div>
     
-            <div id="div_registro" class="form-group row">
-                <label for="materia" class="col-form-label col-md-4">Selecciona la materia</label>
-                <div class="col-md-8">
+            <div id= "">
                 <label>
-                <select name='materia_id' style="width:280px" class="select-css" id="materia" onchange="materia();">    
+                <select name='materia_id' style="width:280px" class="select-css" id="materia" onchange="materia();">
+                <option selected="true" disabled="disabled">Seleccione una materia...</option>
+                 @foreach($materias as $materia)
+                       <option value="{{$materia->id}}">
+                       {{$materia->materia}}
+                        </option>
+                    @endforeach
                 </select></label>
-                </div>
             </div>
 
-            <div id="div_registro" class="form-group row">
-                <label for="docente" class="col-form-label col-md-4">Selecciona el docente</label>
-                <div class="col-md-8">
+            <div id= "">
                 <label>
                 <select name='docente_id' style="width:280px" class="select-css" id="docente" onchange="docente();">
-                    <option selected="true" disabled="disabled">Docentes...</option>
+                    <option selected="true" disabled="disabled">Seleccione un docente...</option>
                     @foreach($docentes as $docente)
                        <option value="{{$docente->id}}">
                        {{$docente->apellido1}}
@@ -210,7 +208,6 @@
                         </option>
                     @endforeach
                 </select></label>
-                </div>
             </div>
             
             <br>
@@ -219,11 +216,20 @@
                  @csrf
 
                  <div id="div_registro" class="form-group row">
-                    <label for="ciclo_escolar" class="col-form-label col-sm-4"> LICENCIATURA:</label>
-                    <div class="col-sm-8">
-                        <input  id="lic" class="form-control" type="text"  style="background-color:transparent" readonly>
-                        <input name="licenciatura_id" id="lic_valor" class="form-control" type="text"  style="background-color:transparent" hidden>
-                    </div>
+                 <label>
+                <select name='materia_id' style="width:280px" class="select-css" id="materia" onchange="materia();">
+                
+                    @foreach($materias as $materia)
+                       <option  selected="true" disabled="disabled" value="{{$materia->licenciatura_id}}">
+                       {{$materia->carrera}}
+                        </option>
+                    @endforeach
+                </select></label>
+                    
+                </div>
+
+                <div id="div_registro" class="form-group row">
+
                 </div>
 
 
@@ -286,6 +292,7 @@
                     </div>      
                 </div>
             </form>
+            @endif 
             </div>
         </div> 
     </div>         
