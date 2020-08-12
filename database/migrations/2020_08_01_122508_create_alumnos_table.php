@@ -21,8 +21,12 @@ class CreateAlumnosTable extends Migration
             $table->string('matricula',15);
             $table->text('sexo');
             $table->text('curp');
-            $table->text('licenciatura');
-            
+
+            $table->unsignedBigInteger('licenciatura_id');
+            $table->foreign('licenciatura_id')->references('id')->on('licenciaturas')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
             $table->unsignedBigInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos')
             ->onDelete('cascade')

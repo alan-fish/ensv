@@ -9,14 +9,19 @@ class Materia extends Model
     protected $table = 'materias';
 
     protected $fillable = [
-        'materia'
+        'materia', 'semestre', 'licenciatura_id'
     ];
 
     public function licenciaturas()
     {
         return $this->hasmany('App\Licenciatura');
     }
-    
+
+    public function licen()
+    {
+        return $this->belongsTo('App\Licenciatura', 'licenciatura_id');
+    }
+
     public function horario()
     {
         return $this->belongsTo('App\Horario' , 'materia_id');
@@ -30,10 +35,10 @@ class Materia extends Model
             $semestre = $data ['1'];
 
             return $query = DB::table('materias')
-                            ->join('licenciaturas', 'materias.licenciatura_id', '=', 'licenciaturas.id')
-                            //->where ('licenciatura_id', '=', "$licenciatura", 'AND', 'semestre', '=', "$semestre");
+                           ->join('licenciaturas', 'materias.licenciatura_id', '=', 'licenciaturas.id')
                            ->where ('licenciaturas.id',$licenciatura)
                            ->where ('materias.semestre', $semestre);
        
     }
+
 }

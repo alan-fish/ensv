@@ -72,6 +72,7 @@
 
 
 <div class="container" id="container-resgistrodocente">
+<script src="{{ asset('js/show_form.js') }}"></script>
   <div class="row justify-content-md-center">
     <div class="col-md-10">
         @isset($message)
@@ -124,53 +125,64 @@
                             <input id="registro-input" class="form-control" type="text" name="fecha_ingreso" value="{{ $docentes->fecha_ingreso }}">
                         </div>
                     </div>
-                    
 
-                    <div id="div_registro" class="form-group row">
-                    <label for="licenciatura" class="col-form-label col-sm-4">Licenciaturas:</label>
-                        <div class="col-sm-8">
-                            <input id="registro-input" class="form-control" type="text" name="licenciatura"  value="{{ $docentes->licenciatura }}">
-                            <input id="registro-input" class="form-control" type="text" name="licenciatura1" value="{{ $docentes->licenciatura1 }}">
-                            <input id="registro-input" class="form-control" type="text" name="licenciatura2" value="{{ $docentes->licenciatura2 }}">
+                    <div id="div_registro"  class="form-group row">
+                    <label for="licenciatura" class="col-form-label col-sm-4"></label>    
+                        <div  class="col-sm-8">
+                        <select onChange="mostrarDiv(this.value);" class="custom-select">
+                            <option value="">¿Qué campos quieres editar?</option>
+                            <option value="licenciatura">Editar Licenciaturas</option>
+                            <option value="maestria">Editar Maestrías</option>
+                            <option value="doctorado">Editar Doctorados</option>
+                        </select>
                         </div>
                     </div>
                     
-                    <div id="div_registro" class="form-group row">
-                        <label for="maestria" class="col-form-label col-sm-4">Maestrías: </label>
-                        <div class="col-sm-8">
-                            <input id="registro-input" class="form-control" type="text" name="maestria"  value="{{ $docentes->maestria }}">
-                            <input id="registro-input" class="form-control" type="text" name="maestria1" value="{{ $docentes->maestria1 }}">
-                            <input id="registro-input" class="form-control" type="text" name="maestria2" value="{{ $docentes->maestria2 }}">
+                    <div id="licenciatura" style="display: none;">
+                        <div id="div_registro" class="form-group row">
+                        <label for="licenciatura" class="col-form-label col-sm-4">Licenciaturas:</label>
+                            <div class="col-sm-8">
+                                <input id="registro-input" class="form-control" type="text" name="licenciatura"  value="{{ $docentes->licenciatura }}">
+                                <input id="registro-input" class="form-control" type="text" name="licenciatura1" value="{{ $docentes->licenciatura1 }}">
+                                <input id="registro-input" class="form-control" type="text" name="licenciatura2" value="{{ $docentes->licenciatura2 }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="maestria" style="display: none;">
+                        <div id="div_registro" class="form-group row">
+                            <label for="maestria" class="col-form-label col-sm-4">Maestrías: </label>
+                            <div class="col-sm-8">
+                                <input id="registro-input" class="form-control" type="text" name="maestria"  value="{{ $docentes->maestria }}">
+                                <input id="registro-input" class="form-control" type="text" name="maestria1" value="{{ $docentes->maestria1 }}">
+                                <input id="registro-input" class="form-control" type="text" name="maestria2" value="{{ $docentes->maestria2 }}">
+                            </div>
                         </div>
                     </div>
                     
-
-                    <div id="div_registro" class="form-group row">
-                        <label for="doctorado" class="col-form-label col-sm-4">Doctorados:</label>
-                        <div class="col-sm-8">
-                            <input id="registro-input" class="form-control" type="text" name="doctorado"  value="{{ $docentes->doctorado }}">
-                            <input id="registro-input" class="form-control" type="text" name="doctorado1" value="{{ $docentes->doctorado1 }}">
-                            <input id="registro-input" class="form-control" type="text" name="doctorado2" value="{{ $docentes->doctorado2 }}">
+                    <div id="doctorado" style="display: none;">
+                        <div id="div_registro" class="form-group row">
+                            <label for="doctorado" class="col-form-label col-sm-4">Doctorados:</label>
+                            <div class="col-sm-8">
+                                <input id="registro-input" class="form-control" type="text" name="doctorado"  value="{{ $docentes->doctorado }}">
+                                <input id="registro-input" class="form-control" type="text" name="doctorado1" value="{{ $docentes->doctorado1 }}">
+                                <input id="registro-input" class="form-control" type="text" name="doctorado2" value="{{ $docentes->doctorado2 }}">
+                            </div>
                         </div>
                     </div>
 
-                    <div id="div_registro" class="form-group row">
-                         <label for="tipo_de_contratacion" class="col-form-label col-sm-4">Tipo de contratación:</label>
-                         <div class="col-sm-8">
-                            <input id="registro-input" class="form-control" type="text" value="{{ $docentes->tipo_de_contratacion }}"disabled>
-                        </div>
-                    </div>      
 
                     <div id="div_registro" class="form-group row">
-                        <label for="tipo_de_contratacion" class="col-form-label col-sm-4">Editar Tipo de contración:</label>
+                        <label for="tipo_de_contratacion" class="col-form-label col-sm-4">Tipo de contratación:</label>
                         <div class="col-sm-8">
-                            <select id="tipo_de_contratacion"  class="custom-select"  name="tipo_de_contratacion" onchange="ShowSelected();">
-                                    <option>Seleecione una opción</option>
+                            <select id="sexo" name="tipo_de_contratacion"  class="custom-select">
+                                    <option selected="true" disabled="disabled" value="{{ $docentes->tipo_de_contratacion }}" >{{ $docentes->tipo_de_contratacion }}</option>
                                     <option value="Tiempo completo">Tiempo Completo</option>
                                     <option value="Medio tiempo">Medito tiempo</option>
                             </select>
-                        </div>
+                            </div>
                     </div>
+                    
 
                     <div id="div_registro" class="form-group row">
                             <label for="email" class="col-form-label col-sm-4">Correo electrónico:</label>

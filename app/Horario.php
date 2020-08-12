@@ -50,7 +50,6 @@ class Horario extends Model
                       ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
                       ->join('materias', 'horarios.materia_id', '=', 'materias.id')
                       ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                      //->where ('ciclo_id', '=', "$ciclo", 'AND', 'grupo_id', '=', "$grupo");
                       ->where ('ciclo_id',$cic)
                       ->where ('horarios.licenciatura_id', $carrera)
                       ->where ('grupo_id',$grp);

@@ -141,16 +141,30 @@
                         </div>
 
                         <div id="div_registro" class="form-group row">
-                            <label for="licenciatura" class="col-form-label col-sm-4">Licenciatura:</label>
+                            <label for="grupo" class="col-form-label col-sm-4">Licenciatura:</label>
                             <div class="col-sm-8">
-                                <input id="registro-input" class="form-control" type="text" name="licenciatura">
+                            <select name="licenciatura_id" class="custom-select">
+                                <option selected="true" disabled="disabled">Selecciona una licenciatura...</option>
+                                @foreach($licenciaturas as $licenciatura)
+                                <option value="{{$licenciatura->id}}">
+                                {{$licenciatura->carrera}}
+                                </option>
+                                @endforeach
+                            </select>
                             </div>
                         </div>
 
                         <div id="div_registro" class="form-group row">
                             <label for="grupo" class="col-form-label col-sm-4">Grupo:</label>
                             <div class="col-sm-8">
-                                <input id="registro-input" class="form-control" type="text" name="grupo">
+                            <select name="grupo_id" class="custom-select">
+                                <option selected="true" disabled="disabled">Seleccione un grupo...</option>
+                                @foreach($grupos as $grupo)
+                                <option value="{{$grupo->id}}">
+                                {{$grupo->grupo}}
+                                </option>
+                                @endforeach
+                            </select>
                             </div>
                         </div>
 

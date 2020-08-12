@@ -75,19 +75,27 @@
     <div class="col-md-10">
       <div class="card-header">
           <h2><b>LISTADO DE DOCENTES ENSV</b></h2>
-        
+          </div>
+          
         <div class="card-body">
-             <nav>
+
+            <nav>
                 <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.list') }}">
-                    <input id="input_busqueda" type="text" name="buscar_nombre" class="form-control" placeholder="Nombre(s)">
-                    <input id="input_busqueda" type="text" name="buscar_estado" class="form-control" placeholder="Estado">        
-                    <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+                    <input id="input_busqueda" style="width:250px" type="text" name="buscar_nombre" class="form-control  my-4 my-sm-0" 
+                        placeholder="Nombre/Nombre completo">
+                    <select name="buscar_estado" style="width:250px" class=" form-control custom-select my-sm-0">
+                        <option selected="true" disabled="disabled">Estado</option>
+                        <option value="Laborando">Laborando</option>
+                        <option value="Enfermo">Enfermo</option>
+                    </select>
+                           
+                    <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-1" type="submit">
                         <i class="fas fa-search"></i> Buscar
                     </button>
-                    <a id="button_busqueda" class="btn btn-outline-primary" 
+                   <!-- <a id="button_busqueda" class="btn btn-outline-primary" 
                         href="{{ route('admin.list') }}"role="button">
                         <i class="fas fa-redo"></i>   Refrescar lista
-                    </a>
+                    </a> -->
                 </form>
             </nav>
         

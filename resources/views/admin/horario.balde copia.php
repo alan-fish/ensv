@@ -83,12 +83,7 @@
 
     <div class="row justify-content-md-center">
         <div class="col-sm-10">
-        @if(session('info'))  
-        <div  class="alert alert-success alert-dismissible fade show">
-            {{session('info')}}
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-        </div>                              
-        @endif   
+
             <div class="card mb-4 shadow-sm">
             <div class="card-header">
             <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
@@ -137,6 +132,12 @@
             </nav>
             
             @if(isset($materias)) 
+            @if(session('info'))  
+            <div  class="alert alert-success alert-dismissible fade show">
+                {{session('info')}}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>                              
+            @endif   
             <div id= "">
                 <label>
                 <select name="ciclo_id" style="width:280px" class="select-css" id="ciclo" onchange="ciclo();">

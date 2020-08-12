@@ -36,13 +36,30 @@ Route::get('/admin/list', 'Admin\AdminController@list')->name('admin.list');
 Route::get('/admin/{id}/edit-docente', 'Admin\AdminController@edit_docente')->name('admin.edit_docente');
 Route::put('/admin/{id}/edit-docente', 'Admin\AdminController@update_docente')->name('admin.update_docente');
 //Rutas para la creación de los horarios
-//crear
+//Creación del horario
 Route::get('/admin/materias/{id}/{string}', 'Admin\AdminController@getMaterias');
 Route::get('/admin/horario', 'Admin\AdminController@horario')->name('admin.horario');
 Route::post('/admin/horario', 'Admin\AdminController@createhorario')->name('admin.horario_store');
 //Consultar horario
 Route::get('/admin/consultarhorario', 'Admin\AdminController@consultarhorario')->name('admin.consultarhorario');
-
+//Rutas licenciatura
+//crear
+Route::get('/admin/datosLicenciatura', 'Admin\AdminController@createLicenciatura')->name('admin.createLicenciatura');
+Route::post('/admin/datosLicenciatura', 'Admin\AdminController@storeLicenciatura')->name('admin.storeDatos');
+//Consultar
+Route::get('/admin/consultarDatos', 'Admin\AdminController@consultartDatosLicenciatura')->name('admin.consutarDatosLicenciatura');
+//EditarCiclo y actualizar
+Route::get('/admin/{id}/editDatos', 'Admin\AdminController@editDatos')->name('admin.editDatos');
+Route::put('/admin/{id}/editDatos', 'Admin\AdminController@updateDatos')->name('admin.updateDatos');
+//Editar Licenciatura y actualizar
+Route::get('/admin/{id}/editLic', 'Admin\AdminController@editLic')->name('admin.editLic');
+Route::put('/admin/{id}/editLic', 'Admin\AdminController@updateLic')->name('admin.updateLic');
+//Editar Grupos y actualizar
+Route::get('/admin/{id}/editGrup', 'Admin\AdminController@editGrup')->name('admin.editGrup');
+Route::put('/admin/{id}/editGrup', 'Admin\AdminController@updateGrup')->name('admin.updateGrup');
+//Editar Materias y actualizar
+Route::get('/admin/{id}/editMat', 'Admin\AdminController@editMat')->name('admin.editMat');
+Route::put('/admin/{id}/editMat', 'Admin\AdminController@updateMat')->name('admin.updateMat');
 
 // Alumno
 //Rutas de inicio y cierre de sesión

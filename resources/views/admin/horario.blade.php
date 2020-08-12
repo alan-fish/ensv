@@ -118,10 +118,16 @@
                         <div class="col-sm-8">
                         <label>
                         <select style="width:280px" class="select-css" id="semestre" >
-                            <option selected="true" disabled="disabled">Semestre</option>
+                            <option selected="true" disabled="disabled" value>Semestre</option>
                             <option value="Primero">Primer semestre</option>
                             <option value="Segundo">Segundo semestre</option>
                             <option value="Tercero">Tercer semestre</option>
+                            <option value="Cuarto">Cuarto semestre</option>
+                            <option value="Quinto">Quinto semestre</option>
+                            <option value="Sexto">Sexto semestre</option>
+                            <option value="Septimo">Séptimo semestre</option>
+                            <option value="Octavo">Octavo semestre</option>
+                            <option value="Noveno">Noveno semestre</option>     
                         </select></label>
                         </div>
 
@@ -191,7 +197,8 @@
                 <label for="materia" class="col-form-label col-md-4">Selecciona la materia</label>
                 <div class="col-md-8">
                 <label>
-                <select name='materia_id' style="width:280px" class="select-css" id="materia" onchange="materia();">    
+                <select name='materia_id' style="width:280px" class="select-css" id="materia" onchange="materia();">
+
                 </select></label>
                 </div>
             </div>
@@ -277,11 +284,11 @@
 
                 <div id="div_registro" class="form-group row">
                     <button id="button_registro" class="btn btn-outline-primary col-sm-6" type="submit">
-                         <i class="fas fa-user-plus"></i> CREAR HORARIO
+                         <i class="fas fa-save"></i> CREAR HORARIO
                     </button>
                     <div class="col-md-6">                  
-                        <a  id="button_cancelar" class=" form-control btn btn-outline-danger"  href="{{ route('admin.menu') }}" role="button">
-                        <i class="fas fa-window-close"></i>   Cancelar
+                        <a  id="button_cancelar" class="form-control btn btn-outline-danger"  href="{{ route('admin.menu') }}" role="button">
+                            <i class="fas fa-window-close"></i>   Cancelar
                         </a>
                     </div>      
                 </div>

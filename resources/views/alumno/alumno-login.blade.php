@@ -7,16 +7,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                <h2><b>INICIO DE SESIÓN ALUMNO</b></h2>
+                    <h2><b>INICIO DE S
+                        ESIÓN ALUMNO</b></h2>
                 </div>
                 <div class="card-body">
 
-                    <form class="login-form" method="POST" action="{{ route('alumno.login.submit') }}" >
+                    <form class="login-form text-center" method="POST" action="{{ route('alumno.login.submit') }}" >
                         @csrf
                     
-                        <!--Por correo o matricula-->
-                        <div class="form-group">  
-                                <label for="login"><b>Correo Electrónico o Matrícula</b></label>                          
+                        <!--Por correo-->
+                        <div class="form-group">
+                            <!--Por correo      <label for="login"><b>Correo Electrónico o Matrícula</b></label>                          
                                 <input id="login" type="text" class="form-control{{ $errors->has('matricula') || 
                                 $errors->has('email') ? ' is-invalid' : '' }}"
                                 name="login" value="{{ old('matricula') ?: old('email') }}" required autofocus 
@@ -26,15 +27,23 @@
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('matricula') ?: $errors->first('email') }}</strong>
                                     </span>
-                                @endif                        
+                                @endif -->                                    
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
+                                 name="email" value="{{ old('email') }}" required autocomplete="email" 
+                                 autofocus placeholder="Correo Electronico">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror                        
                         </div>
 
                         <!--Password-->
-                        <div class="form-group"> 
-                                <label for="password"><b>Contraseña</b></label>                    
+                        <div class="form-group">                     
                                 <input id="password" type="password" 
                                 class="form-control @error('password') is-invalid @enderror" name="password" 
-                                required autocomplete="current-password" placeholder="Contraseña">
+                                required autocomplete="current-password" placeholder="Password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +54,7 @@
 
                         <div class="">                          
                             <button type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
-                                INICIAR SESIÓN
+                                Ingresar
                             </button>
 
                              <!--    @if (Route::has('password.request'))  -->

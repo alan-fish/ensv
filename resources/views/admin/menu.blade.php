@@ -48,8 +48,20 @@
                     <div class="dropdown-menu">
                         <a id="link-dropdown" class="nav-link" href="{{ route('admin.consultarhorario') }}">
                         <i class="fas fa-sign-in-alt"></i> Consultar horarios</a>
-                        <a id="link-dropdown" class="nav-link" href="{{ route('admin.horario') }}">
+                        <a id="link-dropdown" class="nav-link" href="#">
                         <i class="fas fa-sign-in-alt"></i>Crear horario</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <b>  DATOS GENERALES </b>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a id="link-dropdown" class="nav-link" href="{{ route('admin.createLicenciatura') }}">
+                        <i class="fas fa-sign-in-alt"></i> Registrar</a>
+                        <a id="link-dropdown" class="nav-link" href="{{ route('admin.consutarDatosLicenciatura') }}">
+                        <i class="fas fa-sign-in-alt"></i> Consultar</a>
                     </div>
                 </li>
                 <li class="nav-item ">
@@ -74,79 +86,121 @@
      </nav>
 
 
-     <div class="container" id="container_menu">
+<div class="container" id="container-resgistroalumno">
+    
+    <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />
+    <script src="{{ asset('js/horariojs.js') }}"></script>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-10">
+        @if(session('info'))  
+        <div  class="alert alert-success alert-dismissible fade show">
+            {{session('info')}}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>                              
+        @endif   
 
-        <div class="card-deck mb-3 text-center">
 
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>DOCENTES</b></h4>
-            </div>
-            <br>
-            <div class="card-body">
-               <img id="imagen-card"  src="{{ URL::to('assets\img\docentes.png') }}" class ="img-fluid" alt="">
-               <a id="button_a"class="btn btn-lg btn-block" href="{{ route('admin.list') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i>Consultar docente
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.createdocente') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar docente
-               </a>
-            </div>
-          </div>
 
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>ALUMNOS</b></h4>
+
+    <link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
+    <script src="{{ asset('js/horariojs.js') }}"></script>
+
+        <h1>MENÚ ADMINISTRADOR</h1>
+
+          <div class="accordion">
+            <div class="accordion-item">
+              <div class="accordion-item-header">
+              <img src="{{ URL::to('assets\img\docentes.png') }}"  alt="" width="70" height="70" />
+              DOCENTES
+              </div>
+              <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+                <a id="button_a"class="btn btn-lg btn-block" href="{{ route('admin.list') }}" role="button">
+                        <i class="fas fa-sign-in-alt"></i>Consultar docente
+                        </a>
+                        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.createdocente') }}" role="button">
+                        <i class="fas fa-sign-in-alt"></i> Registrar docente
+                        </a>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-                <img id="imagen-card1"  src="{{ URL::to('assets\img\grupos.png') }}" class ="img-fluid" alt=""> 
+            <div class="accordion-item">
+              <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\alumno.png') }}"  alt="" width="70" height="70" />
+                ALUMNOS
+              </div>
+              <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
                 <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.lista') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar alumno
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.create') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Registrar alumno
-               </a>
+                          <i class="fas fa-sign-in-alt"></i>  Consultar alumno
+                        </a>
+                        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.create') }}" role="button">
+                        <i class="fas fa-sign-in-alt"></i> Registrar alumno
+                        </a>      </div>
+              </div>
             </div>
-          </div>
-
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
-            </div>
-            <div class="card-body">
-                <img id="imagen-card2" src="{{ URL::to('assets\img\crear horario.png') }}" class ="img-fluid" alt=""> 
-                <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.consultarhorario') }}" role="button">
-                <i class="fas fa-sign-in-alt"></i>  Consultar horario
-               </a>
-               <a id="button_a" class="btn btn-lg btn-block " href="{{ route('admin.horario') }}" role="button">
-               <i class="fas fa-sign-in-alt"></i> Crear horario
-               </a>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="container text-center" id="container_menu">
-          <div class="row justify-content-md-center">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                  <div class="card-header">
-                    <h4 class="my-0 font-weight-normal"><b>Evaluación doncetes</b></h4>
-                  </div>
-                  <div class="card-body text-center">
-                      <img id="imagen-card3" src="{{ URL::to('assets\img\evaluacion.png') }}" class ="img-fluid" alt=""> 
-                      <a id="button_a" class="btn btn-lg btn-block " href="" role="button">
-                      <i class="fas fa-sign-in-alt"></i> Preguntas
+            <div class="accordion-item">
+              <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\calificaciones.png') }}"  alt="" width="70" height="70" />
+                HORARIO
+              </div>
+              <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+                    <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.consultarhorario') }}" role="button">
+                      <i class="fas fa-sign-in-alt"></i>  Consultar horario
                     </a>
-                    <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-                    <i class="fas fa-sign-in-alt"></i> Consultar
+                    <a id="button_a" class="btn btn-lg btn-block " href="{{ route('admin.horario') }}" role="button">
+                      <i class="fas fa-sign-in-alt"></i> Crear horario
                     </a>
-                  </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\avance.png') }}"  alt="" width="70" height="70" />
+                EVALUACIÓN DOCENTE
+              </div>
+              <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+
+
+              PEGAR LAS RUTAS DE EVALUACION DOCENTE AQUI
+
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\calificaciones.png') }}"  alt="" width="70" height="70" />
+                EXTRA
+              </div>
+              <div class="accordion-item-body">
+                <div class="accordion-item-body-content">
+                  <a id="button_a" class="btn btn-lg btn-block" href="{{ route('admin.createLicenciatura') }}" role="button">
+                      <i class="fas fa-sign-in-alt"></i> Registrar datos generales
+                    </a>
+                    <a id="button_a" class="btn btn-lg btn-block " href="{{ route('admin.consutarDatosLicenciatura') }}" role="button">
+                      <i class="fas fa-sign-in-alt"></i> Consulta de datos generales
+                    </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
 
+          <script>
+          const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
+
+          accordionItemHeaders.forEach(accordionItemHeader => {
+              accordionItemHeader.addEventListener("click", event => {
+
+
+                  accordionItemHeader.classList.toggle("active");
+                  const accordionItemBody = accordionItemHeader.nextElementSibling;
+                  if (accordionItemHeader.classList.contains("active")) {
+                      accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+                  } else {
+                      accordionItemBody.style.maxHeight = 0;
+                  }
+
+              });
+          });
+          </script>
 @endsection

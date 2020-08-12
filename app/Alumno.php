@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use DB;
 
 class Alumno  extends Authenticatable
 {
@@ -13,17 +13,30 @@ class Alumno  extends Authenticatable
     protected $guard = 'alumno';
 
     protected $fillable = [
-        'apellido1', 'apellido2', 'nombre', 'matricula', 'sexo', 'curp', 'licenciatura','grupo_id',
+        'apellido1', 'apellido2', 'nombre', 'matricula', 'sexo', 'curp', 'licenciatura_id','grupo_id',
         'email', 'password', 
     ];
 
     protected $hidden = ['password'];
 
+
+    public function alum()
+    {
+        return $this->belongsTo('App\Grupo', 'grupo_id');
+    }
+
+    public function alumnoLicenciatura()
+    {
+        return $this->belongsTo('App\Licenciatura', 'licenciatura_id');
+    }
+
     public function scopeNombres($query, $name)
     {
         if($name)
         {
-            return $query->where (\DB::raw("CONCAT (nombre, ' ', apellido1, ' ', apellido2)"), 'LIKE', "%$name%" );
+            return $query = DB::table('grupos')
+                                ->join('alumnos', 'alumnos.grupo_id', '=', 'grupos.id')
+                                ->where (\DB::raw("CONCAT (nombre, ' ', apellido1, ' ', apellido2)"), 'LIKE', "%$name%" );
         }
     }
 
@@ -31,7 +44,9 @@ class Alumno  extends Authenticatable
     {
         if($grupo)
         {
-            return $query->where ('grupo', 'LIKE', "%$grupo%");
+            return $query = DB::table('grupos')
+                                ->join('alumnos', 'alumnos.grupo_id', '=', 'grupos.id')
+                                ->where ('grupo_id',$grupo);
         }
     }
     
@@ -39,7 +54,9 @@ class Alumno  extends Authenticatable
     {
         if($matricula)
         {
-            return $query->where ('matricula', '=', "$matricula");
+            return $query = DB::table('grupos')
+                            ->join('alumnos', 'alumnos.grupo_id', '=', 'grupos.id')
+                            ->where ('matricula', '=', "$matricula");
         }
     }
 } 

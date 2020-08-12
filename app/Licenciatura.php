@@ -16,4 +16,6 @@ class Licenciatura extends Model
     {
         return $this->belongsTo('App\Materia', 'licenciatura_id');
     }
+
+
 }

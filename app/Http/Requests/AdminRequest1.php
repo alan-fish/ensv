@@ -29,9 +29,9 @@ class AdminRequest1 extends FormRequest
         'apellido2' => 'required',
         'nombre' => ['required', 'string', 'max:255'],
         'matricula' => 'required',
-        'sexo' => 'required',
+        //'sexo' => 'required',
         'curp' => 'required',
-        'licenciatura' => 'required',
+        'licenciatura_id' => 'required',
         'email' => ['required', 'string', 'email', 'max:255', 'unique:docentes'],
     ];
     //Falta poner los mensajes de erro de cada campo aquí

@@ -17,6 +17,7 @@ use App\Grupo;
 use App\Materia;
 use App\Horario;
 use App\Licenciatura;
+use DB;
 
 class AdminController extends Controller
 {
@@ -42,14 +43,18 @@ class AdminController extends Controller
     }
 //Alumno
 
-    public function create()
+    public function create(Request $request)
     {
-        return view ('/admin/registro-alumno');
+        $grupos = Grupo::all();
+        $licenciaturas = Licenciatura::all();
+
+        return view ('/admin/registro-alumno')->with(['licenciaturas'=> $licenciaturas,  'grupos' => $grupos]);
     }
 
     public function store(AdminRequest $request)
     {
-
+        $grupos = Grupo::all();
+        $licenciaturas = Licenciatura::all();
         $data = request()->all();
 
          Alumno::create([
@@ -59,45 +64,74 @@ class AdminController extends Controller
         'matricula' => $data['matricula'],
         'sexo' => $data['sexo'],
         'curp' => $data['curp'],
-        'licenciatura' => $data['licenciatura'],
-        'grupo' => $data['grupo'],
+        'licenciatura_id' => $data['licenciatura_id'],
+        'grupo_id' => $data['grupo_id'],
         'email' => $data['email'],
         'password' => bcrypt($data['password'])
-
        ]);
+
        $message="Alumno registrado exitosamente";
-       return view ('/admin/registro-alumno',compact('message'));
+       return view ('/admin/registro-alumno',compact('message'))->with(['licenciaturas'=> $licenciaturas,  'grupos' => $grupos]);
     }
 
 
     public function lista(Request $request)
-    {
+    {   
+        $grupos = Grupo::all();
+
         $name = $request->get('buscar_nombre');
         $matricula = $request->get('buscar_matricula');
         $grupo = $request->get('buscar_grupo');
-       
-        $alumnos = Alumno::nombres($name)->grupos($grupo)->matriculas($matricula)->paginate(4);
 
-        return view('/admin/lista-alumno')->with('alumnos', $alumnos);        
+        if((isset ($name))){
+            $alumnos = Alumno::nombres($name)->paginate(4);
+            return view('/admin/lista-alumno',['grupos' => $grupos])->with('alumnos', $alumnos);
+        }
+        if((isset ($matricula))){
+            $alumnos = Alumno::matriculas($matricula)->paginate(4);
+            return view('/admin/lista-alumno',['grupos' => $grupos])->with('alumnos', $alumnos);
+        }
+        if((isset ($grupo))){
+            $alumnos = Alumno::grupos($grupo)->paginate(4);
+            return view('/admin/lista-alumno',['grupos' => $grupos])->with('alumnos', $alumnos);
+        }
+        return view('/admin/lista-alumno',['grupos' => $grupos]);
     }
    
 
-    public function editalumno($id)
+    public function editalumno (Request $request, $id)
     {
-        $alumno = Alumno::findOrFail($id);
-       
-        return view('/admin/edit-alumno')->with('alumno', $alumno);
+       $grupos = Grupo::all();
+       $licenciaturas = Licenciatura::all();
+
+       $alumno = Alumno::findOrFail($id);
+       $alum = $alumno->alum;
+       $alumnoLicenciatura = $alumno->alumnoLicenciatura;
+        
+        return view('/admin/edit-alumno', compact('alumno','alum', 'alumnoLicenciatura'))->with(['licenciaturas'=> $licenciaturas,  
+                                                                                                'grupos' => $grupos]);
     }
 
     public function  updatealumno(AdminRequest1 $request, $id)
-    {
+    {   
+        //En esta función necesito checar las reglas y sus mensajes
         $datosalumno= request()->except(['_token', '_method', 'password']);
-        
+
         Alumno::where('id', '=', $id)->update( $datosalumno);
+        $message="Información actualizada correctamente";
 
         $alumno = Alumno::findOrFail($id);
-        $message="Información actualizada correctamente";
-        return view('/admin/edit-alumno',compact('message'))->with('alumno', $alumno);
+        //Este es la manera en como puedo llamar a las relaciones para actualizar
+        //Para consultar su grupo
+        $alum = $alumno->alum;
+        //Para consultar su licenciatura
+        $alumnoLicenciatura = $alumno->alumnoLicenciatura;
+        $grupos = Grupo::all();
+        $licenciaturas = Licenciatura::all();
+        
+        return view('/admin/edit-alumno',compact('message'))->with(['alumno'=> $alumno,'alum' =>$alum, 'alumnoLicenciatura' => $alumnoLicenciatura,  
+                                                                    'grupos' => $grupos, 'licenciaturas'=> $licenciaturas,]);
+
     }
 
 //Docente
@@ -141,7 +175,7 @@ class AdminController extends Controller
         $estado = $request->get('buscar_estado');
 
         $docentes = Docente::nombres($name)->estado($estado)->paginate(4);
-         return view('/admin/list')->with('docentes', $docentes); 
+        return view('/admin/list')->with('docentes', $docentes); 
     }
 
 
@@ -202,7 +236,7 @@ class AdminController extends Controller
            'docente_id' => $horario ['docente_id'],
            ]);
 
-        return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
+            return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
     }
 
     public function consultarhorario(Request $request)
@@ -218,12 +252,162 @@ class AdminController extends Controller
         if((isset ($cic)) && (isset ($grp)) && (isset ($carrera)) ){
         $data = [$cic, $grp, $carrera];
         $horarios = Horario::horarios($data)->paginate(10);
-        return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])->with('horarios', $horarios);
+        return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])
+                    ->with('horarios', $horarios);
         }
         else{
             return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas]);
         }
         
+    }
+    //Datos para cada carrera 
+    public function createLicenciatura(Request $request)
+    {
+        $licenciaturas = Licenciatura::all();
+        return view ('/admin/datosLicenciatura')->with('licenciaturas', $licenciaturas);
+    }
+
+    public function storeLicenciatura(Request $request)
+    {   
+        //Para el ciclo
+        $cic =$request->get('ciclo');
+        //Para el grupo
+        $grp =$request->get('grupo');
+        //Para la licenciatura
+        $licen = $request->get('licenciatura');
+        //Para la materias con sus licenciatura y semestre
+        $licen_id = $request->get('licenciatura_id');
+        $mate = $request->get('materia');
+        $sem = $request->get('semestre');
+        
+
+        
+        if((isset ($cic))){
+            ciclo::create(['ciclo' => $cic]);
+            return redirect()->route('admin.createLicenciatura')->with('info', '¡Ciclo escolar guardado correctamente!');
+        }
+        if((isset ($grp))){
+            grupo::create(['grupo' => $grp]);
+            return redirect()->route('admin.createLicenciatura')->with('info', '¡Grupo guardado correctamente!');
+        }
+        if((isset ($licen))){
+            Licenciatura::create(['carrera' => $licen]);
+            return redirect()->route('admin.createLicenciatura')->with('info', '¡Licenciatura guardada correctamente!');
+        }
+        if((isset ($licen_id)) && (isset ($mate)) && (isset ($sem)) ){
+            Materia::create(['licenciatura_id' => $licen_id,
+                             'materia' => $mate,
+                             'semestre' => $sem]);
+            return redirect()->route('admin.createLicenciatura')->with('info', '¡Materia guardada correctamente!'); 
+        }
+    }
+
+    public function consultartDatosLicenciatura(Request $request)
+    {   
+
+        //Para el ciclo
+        $consulta =$request->get('buscarConsulta');
+        
+        if($consulta == 'Ciclo'){
+            $ciclos = Ciclo::paginate(4);            
+            return view ('admin/consultarDatos')->with(['ciclos' => $ciclos]);
+        }
+
+        if($consulta == 'Grupo'){
+            $grupos = Grupo::paginate(4);
+            return view ('admin/consultarDatos')->with(['grupos' => $grupos ]);;
+        }
+
+        if($consulta == 'Licenciatura'){
+            $licenciaturas = Licenciatura::paginate(4);
+            return view ('admin/consultarDatos')->with(['licenciaturas' => $licenciaturas]);
+        }  
+        if($consulta == 'Materias'){
+            $materias = DB::table('licenciaturas')
+                           ->join('materias', 'materias.licenciatura_id', '=', 'licenciaturas.id')
+                           ->paginate(5);
+            return view ('admin/consultarDatos')->with(['materias' => $materias]);
+        }          
+       
+        return view ('admin/consultarDatos');
+    
+    }
+
+    public function editDatos($id)
+    {
+        $ciclos = Ciclo::findOrFail($id);
+        return view('/admin/editDatos')->with('ciclos', $ciclos);
+    }
+
+    public function  updateDatos(Request $request, $id)
+    {
+        $ciclo= request()->except(['_token', '_method']);
+        
+        Ciclo::where('id', '=', $id)->update( $ciclo);
+        $message="Información actualizada correctamente";
+        $ciclo = Ciclo::findOrFail($id);
+        return view('/admin/editDatos',compact('message'))->with('ciclos', $ciclo);
+    }
+
+    public function editLic($id)
+    {
+        $licenciatura = Licenciatura::findOrFail($id);
+        return view('/admin/editLic')->with('licenciatura', $licenciatura);
+    }
+
+    public function  updateLic(Request $request, $id)
+    {
+        $lic= request()->except(['_token', '_method']);
+        
+        Licenciatura::where('id', '=', $id)->update( $lic);
+        $message="Información actualizada correctamente";
+        $licenciatura = Licenciatura::findOrFail($id);
+        return view('/admin/editLic',compact('message'))->with('licenciatura', $licenciatura);
+    }
+
+    public function editGrup($id)
+    {
+        $grupo = Grupo::findOrFail($id);
+        return view('/admin/editGrup')->with('grupo', $grupo);
+    }
+
+    public function  updateGrup(Request $request, $id)
+    {
+        $grp= request()->except(['_token', '_method']);
+        
+        Grupo::where('id', '=', $id)->update( $grp);
+        $message="Información actualizada correctamente";
+        $grupo = Grupo::findOrFail($id);
+        return view('/admin/editGrup',compact('message'))->with('grupo', $grupo);
+    }
+
+
+    public function editMat (Request $request, $id)
+    {
+       $licenciaturas = Licenciatura::all();
+
+       $materia = Materia::findOrFail($id);
+       $matLicenciatura = $materia->licen;
+    
+        return view('/admin/editMat', compact('materia','matLicenciatura'))->with('licenciaturas', $licenciaturas);
+    }
+
+    public function  updateMat(Request $request, $id)
+    {   
+        //En esta función necesito checar las reglas y sus mensajes
+        $datosMat= request()->except(['_token', '_method']);
+
+        Materia::where('id', '=', $id)->update( $datosMat);
+        $message="Información actualizada correctamente";
+
+        $materia = Materia::findOrFail($id);
+        //Ento al modelo para buscar la funcion que contiene la relacion de la licenciatura
+        $matLicenciatura = $materia->licen;
+        //Hago otra vez la consulta pra mandar la información de dicha consulta otra vez a la vista
+        $licenciaturas = Licenciatura::all();
+        
+        return view('/admin/editMat',compact(['message','materia','matLicenciatura']))->with('licenciaturas',$licenciaturas);
+
     }
 
 }

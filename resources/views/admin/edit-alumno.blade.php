@@ -112,8 +112,6 @@
                             </div>
                     </div>
 
-                    
-
                     <div id="div_registro" class="form-group row">
                             <label for="matricula" class="col-form-label col-sm-4">Matrícula:</label>
                             <div class="col-sm-8">
@@ -122,17 +120,10 @@
                     </div>
                     
                     <div id="div_registro" class="form-group row">
-                         <label for="sexo" class="col-form-label col-sm-4">Sexo</label>
-                         <div class="col-sm-8">
-                            <input id="registro-input" class="form-control" type="text" value="{{ $alumno->sexo }}"disabled>
-                        </div>
-                    </div>
-
-                    <div id="div_registro" class="form-group row">
                         <label for="sexo" class="col-form-label col-sm-4">Sexo:</label>
                         <div class="col-sm-8">
-                            <select id="sexo" name="sexo"  class="custom-select"  onchange="ShowSelected();">
-                                    <option>Seleecione una opción</option>
+                            <select id="sexo" name="sexo"  class="custom-select">
+                                    <option selected="true" disabled="disabled" value="{{ $alumno->sexo }}" >{{ $alumno->sexo }}</option>
                                     <option value="M">Mujer</option>
                                     <option value="H">Hombre</option>
                             </select>
@@ -147,20 +138,35 @@
                             </div>
                     </div>
                     
+
                     <div id="div_registro" class="form-group row">
                             <label for="licenciatura" class="col-form-label col-sm-4">Licenciatura:</label>
                             <div class="col-sm-8">
-                                <input id="registro-input" class="form-control" type="text" name="licenciatura" value="{{ $alumno->licenciatura }}">
+                                <select  name="licenciatura_id"  class="custom-select" >
+                                        <option selected="true" disabled="disabled" value='{{ $alumno->licenciatura_id }}'>{{ $alumnoLicenciatura->carrera }}</option>
+                                        @foreach($licenciaturas as $licenciatura)
+                                        <option value="{{$licenciatura->id}}">
+                                        {{$licenciatura->carrera}}
+                                        </option>
+                                        @endforeach
+                                </select>
                             </div>
                     </div>
-                    
+
                     <div id="div_registro" class="form-group row">
-                            <label for="grupo" class="col-form-label col-sm-4">Grupo:</label>
+                            <label for="licenciatura" class="col-form-label col-sm-4">Grupo:</label>
                             <div class="col-sm-8">
-                                <input id="registro-input" class="form-control" type="text" name="grupo" value="{{ $alumno->grupo }}">
+                                <select  name="grupo_id"  class="custom-select" >
+                                        <option selected="true" disabled="disabled" value='{{ $alumno->grupo_id }}'>{{ $alum->grupo }}</option>
+                                        @foreach($grupos as $grupo)
+                                        <option value="{{$grupo->id}}">
+                                        {{$grupo->grupo}}
+                                        </option>
+                                        @endforeach
+                                </select>
                             </div>
                     </div>
-                    
+  
                     <div id="div_registro" class="form-group row">
                             <label for="email" class="col-form-label col-sm-4">Correo electrónico:</label>
                             <div class="col-sm-8">

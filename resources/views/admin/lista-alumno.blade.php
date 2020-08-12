@@ -75,23 +75,38 @@
 <div class="container" id="container-resgistroalumno">
   <div class="row justify-content-md-center">
     <div class="col-md-10">
+
       <div class="card-header">
           <h2><B>ALUMNOS ENSV</B></h2>
-
-        <div class="card-body">
-            <nav>
+          <h5>Buscar por...</h5>
+          <nav>
                 <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.lista') }}" role="search">
-                    <input id="input_busqueda" type="text" name="buscar_grupo" class="form-control col-form-label col-sm-2" placeholder="Grupo"> 
+                    <select name="buscar_grupo" class=" form-control custom-select">
+                        <option selected="true" disabled="disabled">Grupo</option>
+                        @foreach($grupos as $grupo)
+                        <option value="{{$grupo->id}}">
+                        {{$grupo->grupo}}
+                        </option>
+                        @endforeach
+                    </select>
                     <input id="input_busqueda" type="text" name="buscar_matricula" class="form-control col-form-label col-sm-2" placeholder="Matricula">
-                    <input id="input_busqueda" type="text" name="buscar_nombre" class="form-control col-form-label col-sm-3" placeholder="Nombre completo">                     
+                    <input id="input_busqueda" type="text" name="buscar_nombre" class="form-control col-form-label col-sm-4" placeholder="Nombre completo">                     
                     <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
                         <i class="fas fa-search"></i> Buscar
                     </button>
                     <a id="button_busqueda"  class="float-right btn btn-outline-primary" href="{{ route('admin.lista') }}" role="button">
-                        <i class="fas fa-redo"></i>   Refrescar lista
+                        <i class="fas fa-redo"></i> Refrescar 
                         </a>
                 </form>
             </nav>
+        <div class="card-body">
+        @isset($message)
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                 <strong>{{$message}}</strong>
+            </div>
+        @endif
+        @if(isset($alumnos))  
           <table class="table-responsive table table-hover">
             <thead>      
                 <th>GRUPO</th>  
@@ -107,7 +122,7 @@
 
                     <tr>
                       <td>
-                            {{ $alumno-> grupo}}                        
+                        {{ $alumno-> grupo}}                        
                         </td>
                         <td>
                             {{ $alumno->apellido1 }}
@@ -120,7 +135,8 @@
                             {{ $alumno-> nombre}}                         
                         </td>
                         <td>
-                            {{ $alumno-> matricula}}                        
+                            {{ $alumno-> matricula}}
+                            {{ $alumno-> id}}                             
                         </td>
                         <td>
                         <a href="{{ route('admin.edit_alumno', $alumno->id) }}" class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>Editar</a>
@@ -130,7 +146,7 @@
                 </tbody>
         </table>
         {{ $alumnos->links()}} 
-        
+        @endif 
         </div>
         
       </div>
