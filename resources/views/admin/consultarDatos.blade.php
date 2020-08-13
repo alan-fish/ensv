@@ -186,7 +186,7 @@
             </div>
 
             @if(isset($materias))  
-            <div  id="tablaGrupo" >
+            <div  id="tablaMaterias" >
             <table class="table-responsive table table-hover">
                 <thead>
                     <th>#</th>      

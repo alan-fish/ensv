@@ -14,25 +14,31 @@ class Horario extends Model
         'materia_id', 'docente_id' 
     ];
 
-
-    public function ciclos()
+    
+    public function horarioLicenciatura()
     {
-        return $this->hasmany('App\Ciclo');
+        return $this->belongsTo('App\Licenciatura', 'licenciatura_id');
+    }
+    
+
+    public function horarioCiclo()
+    {
+        return $this->belongsTo('App\Ciclo', 'ciclo_id');
     }
 
-    public function grupos()
+    public function horarioGrupo()
     {
-        return $this->hasmany('App\Grupos');
+        return $this->belongsTo('App\Grupo', 'grupo_id');
     }
 
-    public function materias()
+    public function horarioMateria()
     {
-        return $this->hasmany('App\Materia');
+        return $this->belongsTo('App\Materia', 'materia_id');
     }
 
-    public function docentes()
+    public function horarioDocente()
     {
-        return $this->hasmany('App\Docente');
+        return $this->belongsTo('App\Docente', 'docente_id');
     }
 
     public function scopeHorarios($query, $data)
@@ -45,11 +51,17 @@ class Horario extends Model
             $carrera =  $data ['2'];
 
             return $query = DB::table('horarios')
-            ->leftjoin('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                      ->leftjoin('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
                       ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
                       ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
                       ->join('materias', 'horarios.materia_id', '=', 'materias.id')
                       ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                      ->select( 'horarios.id',
+                                'licenciaturas.carrera','ciclos.ciclo', 
+                                'grupos.grupo', 'horarios.dia',
+                                'horarios.hora','materias.materia',
+                                'docentes.apellido1', 'docentes.apellido2',
+                                'docentes.nombre')
                       ->where ('ciclo_id',$cic)
                       ->where ('horarios.licenciatura_id', $carrera)
                       ->where ('grupo_id',$grp);

@@ -126,6 +126,7 @@ class AdminController extends Controller
         $alum = $alumno->alum;
         //Para consultar su licenciatura
         $alumnoLicenciatura = $alumno->alumnoLicenciatura;
+        
         $grupos = Grupo::all();
         $licenciaturas = Licenciatura::all();
         
@@ -224,7 +225,7 @@ class AdminController extends Controller
     public function createhorario(Request $request)
     {   
 
-        $horario = request()->all();
+          $horario = request()->all();
         
            horario::create([
            'licenciatura_id' => $horario ['licenciatura_id'],
@@ -245,9 +246,9 @@ class AdminController extends Controller
         $grupos = Grupo::all();
         $licenciaturas = Licenciatura::all();
 
-          $cic =$request->get('c');
-          $grp =$request->get('g');
-          $carrera =$request->get('carrera');
+        $cic =$request->get('c');
+        $grp =$request->get('g');
+        $carrera =$request->get('carrera');
 
         if((isset ($cic)) && (isset ($grp)) && (isset ($carrera)) ){
         $data = [$cic, $grp, $carrera];
@@ -260,7 +261,84 @@ class AdminController extends Controller
         }
         
     }
-    //Datos para cada carrera 
+
+    public function editHorario(Request $request, $id){
+
+        //La consulta de todas las tablas para mandarlos a cada select
+        $licenciaturas = Licenciatura::all();
+        $ciclos = Ciclo::all();
+        $grupos = Grupo::all();
+        $docentes = Docente::all();
+ 
+        $horario = Horario::findOrFail($id);
+        //Las relaciones de horarios en sus modelo
+        $horarioLicenciatura = $horario->horarioLicenciatura;
+        $horarioCiclo = $horario->horarioCiclo;
+        $horarioGrupo = $horario->horarioGrupo;
+        $horarioMateria =$horario->horarioMateria;
+        $horarioDocente = $horario->horarioDocente;
+     
+        return view('/admin/editHorario',['horario'=> $horario, 'horarioLicenciatura' => $horarioLicenciatura,  
+                    'horarioCiclo'=> $horarioCiclo, 'horarioGrupo' => $horarioGrupo, 'horarioMateria' => $horarioMateria,
+                    'horarioDocente' => $horarioDocente])
+                  ->with(['licenciaturas'=> $licenciaturas, 'ciclos'=> $ciclos, 'grupos' => $grupos,'docentes' => $docentes]);
+                                                                                      
+    }
+
+    public function  updateHorario(Request $request, $id)
+    {
+        //En esta función necesito checar las reglas y sus mensajes
+        $horaioActualizar= request()->except(['_token', '_method']);
+
+        Horario::where('id', '=', $id)->update( $horaioActualizar);
+        $message="¡Horario actualizado correctamente!";
+        
+        $horario = Horario::findOrFail($id);
+        //Las relaciones de horarios en sus modelo
+        $horarioLicenciatura = $horario->horarioLicenciatura;
+        $horarioCiclo = $horario->horarioCiclo;
+        $horarioGrupo = $horario->horarioGrupo;
+        $horarioMateria =$horario->horarioMateria;
+        $horarioDocente = $horario->horarioDocente;
+                
+        //La consulta de todas las tablas para mandarlos a cada select
+        $licenciaturas = Licenciatura::all();
+        $ciclos = Ciclo::all();
+        $grupos = Grupo::all();
+        $docentes = Docente::all();
+                
+        return view('/admin/editHorario',compact('message'))
+        ->with(['horario'=> $horario, 
+                'horarioLicenciatura' => $horarioLicenciatura,
+                'horarioCiclo'=> $horarioCiclo, 
+                'horarioGrupo' => $horarioGrupo,
+                'horarioMateria' => $horarioMateria,
+                'horarioDocente' => $horarioDocente,
+                'licenciaturas'=> $licenciaturas,
+                'ciclos'=> $ciclos,
+                'grupos' => $grupos,
+                'docentes' => $docentes
+        ]); 
+    }
+
+    public function borrarHorario(Request $request, $id)
+    {
+        $horario = Horario::findOrFail($id);
+        $horario->delete();
+        $message="Hoarario eliminado correctamente";
+
+        $ciclos = Ciclo::all();
+        $grupos = Grupo::all();
+        $licenciaturas = Licenciatura::all();
+
+        return view ('/admin/consultarhorario', compact('message'))->with(
+            ['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas]
+            );
+    }
+
+
+
+//Datos generales para cada carrera 
     public function createLicenciatura(Request $request)
     {
         $licenciaturas = Licenciatura::all();

@@ -34,6 +34,7 @@ function materia() {
     document.getElementById("materias_valor").value = displayvalue;
 }
 
+
 function ciclo() {
     var d = document.getElementById("ciclo");
     var displaytext = d.options[d.selectedIndex].text;

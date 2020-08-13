@@ -77,13 +77,18 @@
 <div class="container" id="container-resgistrodocente">
   <div class="row justify-content-md-center">
     <div class="col-md-12">
+        @isset($message) 
+        <div  class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{$message}}</strong>
+        </div>                              
+        @endif  
       <div class="card-header">
           <h2><b>CONSULTAR HORARIO</b></h2>
+        </div>
           <div class="card-body">
              <nav>
                 <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.consultarhorario') }}">
-              
-
                 <div id= "">
                 <label>
                 <select name="carrera" style="width:280px" class="select-css" >
@@ -125,51 +130,65 @@
                     </button>
                 </form>
             </nav>
-            <br>
-            <br>
-            <br>
-            <br>
-@if(isset($horarios)) 
-    <table class="table-responsive table table-hover">
-    @foreach($horarios as $horario)
-                    <tbody>     
-               
-                     <tr>
-                            <td>
+
+        @if(isset($horarios)) 
+            <table class="table-responsive table table-hover">
+                <thead>
+                    <th>LICENCIATURA</th>
+                    <th>CICLO ESCOLAR</th>
+                    <th>GRUPO</th>
+                    <th>DÍA</th>
+                    <th>HORA</th>
+                    <th>MATERIA</th>
+                    <th>DOCENTE</th>
+                    <th></th>
+                </thead>                
+                    <tbody>
+                    @foreach($horarios as $horario) 
+                        <tr>
+                            <td  style="width:100px">
                             {{$horario->carrera}}  
                             </td>
-                            <td>
+                            <td  style="width:150px">
                             {{$horario->ciclo}}  
                             </td>
-                            <td>
+                            <td  style="width:50px">
                             {{$horario->grupo}}  
                             </td>
-                            <td>
+                            <td style="width:50px">
                             {{ $horario->dia}}  
                             </td>
-                            <td>
+                            <td style="width:100px">
                             {{ $horario->hora}}  
                             </td>
-                            <td>
+                            <td style="width:150px">
                             {{ $horario->materia}}  
                             </td>
-                            <td>
+                            <td style="width:200px">
                             {{ $horario->apellido1}}
                             {{ $horario->apellido2}}
                             {{ $horario->nombre}}      
+                            </td>
+                            <td> {{ $horario->id}}  </td>
+                            <td>
+                            <a href="{{ route('admin.editHorarios', $horario->id) }}" class="btn btn-warning btn-sm"> 
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{{ route('admin.borrarHorarios', $horario->id)}}" 
+                               onclick="return confirm('¿Quieres eliminar este horario?')" 
+                               class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i> 
+                               Eliminar
+                            </a>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
             </table>  
-
-            @endif 
+        @endif 
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
 @endsection
+

@@ -42,6 +42,11 @@ Route::get('/admin/horario', 'Admin\AdminController@horario')->name('admin.horar
 Route::post('/admin/horario', 'Admin\AdminController@createhorario')->name('admin.horario_store');
 //Consultar horario
 Route::get('/admin/consultarhorario', 'Admin\AdminController@consultarhorario')->name('admin.consultarhorario');
+//Editar y actualizar horario
+Route::get('/admin/{id}/editHorario', 'Admin\AdminController@editHorario')->name('admin.editHorarios');
+Route::put('/admin/{id}/editHorario', 'Admin\AdminController@updateHorario')->name('admin.updateHorarios');
+//Eliminar horario
+Route::get('/admin/{id}/borrarHorario', 'Admin\AdminController@borrarHorario')->name('admin.borrarHorarios');
 //Rutas licenciatura
 //crear
 Route::get('/admin/datosLicenciatura', 'Admin\AdminController@createLicenciatura')->name('admin.createLicenciatura');
