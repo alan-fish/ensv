@@ -89,41 +89,39 @@
           <div class="card-body">
              <nav>
                 <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.consultarhorario') }}">
-                <div id= "">
-                <label>
-                <select name="carrera" style="width:280px" class="select-css" >
-                    <option selected="true" disabled="disabled">Selecciona la licenciatura</option>
+
+                <select name="carrera" class=" form-control custom-select">
+                    <option selected="true" disabled="disabled" >
+                        Selecciona la licenciatura
+                    </option>
                     @foreach($licenciaturas as $licenciatura)
                        <option value="{{$licenciatura->id}}">
                        {{$licenciatura->carrera}}
                         </option>
                     @endforeach
-                </select></label>
-                </div>
-
-                <div id= "">
-                    <label>
-                    <select name="c" style="width:280px" class="select-css">
-                    <option selected="true" disabled="disabled">Selecciona el ciclo escolar</option>
+                </select>
+                    &nbsp;
+                <select name="c"  class=" form-control custom-select">
+                    <option selected="true" disabled="disabled" >
+                        Selecciona el ciclo escolar
+                    </option>
                     @foreach($ciclos as $ciclo)
-                       <option value="{{$ciclo->id}}">
+                    <option value="{{$ciclo->id}}">
                        {{$ciclo->ciclo}}
-                        </option>
+                    </option>
                     @endforeach
-                    </select></label>
-                </div>
-        
-                <div id= "">
-                    <label>
-                    <select name="g" style="width:280px" class="select-css">
-                        <option selected="true" disabled="disabled">Selecciona el grupo...</option>
-                        @foreach($grupos as $grupo)
-                        <option value="{{$grupo->id}}">
-                        {{$grupo->grupo}}
-                            </option>
-                        @endforeach
-                    </select></label>
-                </div>
+                </select>
+                &nbsp;
+                <select name="g"   class=" form-control custom-select">
+                    <option selected="true" disabled="disabled" >
+                        Selecciona el grupo
+                    </option>
+                    @foreach($grupos as $grupo)
+                    <option value="{{$grupo->id}}">
+                    {{$grupo->grupo}}
+                    </option>
+                    @endforeach
+                </select>
 
                     <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
                         <i class="fas fa-search"></i> Buscar
@@ -162,19 +160,19 @@
                             {{ $horario->hora}}  
                             </td>
                             <td style="width:150px">
-                            {{ $horario->materia}}  
+                            {{$horario->materia}}  
                             </td>
                             <td style="width:200px">
                             {{ $horario->apellido1}}
                             {{ $horario->apellido2}}
                             {{ $horario->nombre}}      
                             </td>
-                            <td> {{ $horario->id}}  </td>
                             <td>
-                            <a href="{{ route('admin.editHorarios', $horario->id) }}" class="btn btn-warning btn-sm"> 
+                            <a  style="width:90px" href="{{ route('admin.editHorarios', $horario->id) }}" 
+                                class="btn btn-warning btn-sm my-sm-1"> 
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="{{ route('admin.borrarHorarios', $horario->id)}}" 
+                            <a style="width:90px" href="{{ route('admin.borrarHorarios', $horario->id)}}" 
                                onclick="return confirm('¿Quieres eliminar este horario?')" 
                                class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i> 
                                Eliminar
@@ -183,7 +181,8 @@
                         </tr>
                         @endforeach
                     </tbody>
-            </table>  
+            </table> 
+            {{ $horarios->appends(request()->query())->links()}}   
         @endif 
         </div>
       </div>

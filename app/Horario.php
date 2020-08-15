@@ -67,4 +67,10 @@ class Horario extends Model
                       ->where ('grupo_id',$grp);
        }    
     }
+
+    public function docentes()
+    {
+        return $this->belongsToMany(Docente::class, 'id');
+    }
+
 }

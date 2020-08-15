@@ -42,9 +42,9 @@ class Docente  extends Authenticatable
     }
 
     
-    public function horario()
+    public function horarios()
     {
-        return $this->belongsTo('App\Horario', 'docente_id');
+        return $this->belongsTo(Horario::class, 'horarios','docente_id');
     }
     
 } 

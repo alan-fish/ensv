@@ -16,7 +16,7 @@ class Grupo extends Model
     
     public function horario()
     {
-        return $this->belongsTo('App\Horario', 'grupo_id');
+        return $this->belongsToMany('App\Horario', 'id');
     }
 
     public function alum()

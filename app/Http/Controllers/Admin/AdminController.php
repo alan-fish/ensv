@@ -252,7 +252,9 @@ class AdminController extends Controller
 
         if((isset ($cic)) && (isset ($grp)) && (isset ($carrera)) ){
         $data = [$cic, $grp, $carrera];
-        $horarios = Horario::horarios($data)->paginate(10);
+        $horarios = Horario::horarios($data)
+                    ->orderBy('dia')
+                    ->paginate(5);
         return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])
                     ->with('horarios', $horarios);
         }

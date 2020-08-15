@@ -78,6 +78,10 @@ Route::post('/alumno/update_password', 'Alumno\AlumnoController@updatepassword')
 Route::group(['middleware' => ['changepassword']], function () {
 Route::get('/alumno/menualumno', 'Alumno\AlumnoController@menu')->name('alumno.menu');
 Route::get('/alumno/perfil-alumno', 'Alumno\AlumnoController@perfil')->name('alumno.perfil');
+Route::get('/alumno/{id}/perfil-alumno', 'Alumno\AlumnoController@perfilAlumno')->name('alumno.perfilAlumno');
+//Ruta del horario
+Route::get('/alumno/{id}/horario', 'Alumno\AlumnoController@horarioAlumno')->name('alumno.horarioAlumno');
+
 });
 
 //Docente
@@ -92,6 +96,10 @@ Route::post('/docente/update_password', 'Docente\DocenteController@updatepasswor
 Route::group(['middleware' => ['changepassword-docente']], function () {
 Route::get('/docente/menudocente', 'Docente\DocenteController@menu')->name('docente.menu');
 Route::get('/docente/perfil-docente', 'Docente\DocenteController@perfil')->name('docente.perfil');
+//Ruta de su horario con sus grupos
+Route::get('/docente/{id}/horario', 'Docente\DocenteController@horarioGrupo')->name('docente.gruposDocente');
+//Ruta para ver los grupos que tiene 
+Route::get('/docente/{id}/grupos', 'Docente\DocenteController@grupos')->name('docente.grupos');
 });
 
 
