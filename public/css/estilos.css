@@ -42,11 +42,12 @@ select {
 
 }
 
-
 #button_registro{
   border-radius: 15px;
   color: #000000;
   margin-top: 10px;
+  text-align: center;
+  float: right;
 }
 #button_cancelar{
   border-radius: 15px;
@@ -119,7 +120,11 @@ select {
   width: 200px; height: 200px;
   padding-bottom: 10px;
 }
-
+/*CSS para el select */
+.custom-select:focus{
+  border-color:  #666;
+  box-shadow: 0 0 0 0.25rem rgba(255, 123, 0, 0.267);
+}
 
 .card-deck{
     padding-top: 50px;
@@ -170,27 +175,27 @@ select {
     color: #000000;
   }
   .navbar .navbar-nav .dropdown-menu {
-    background-color: #eb6f31;
-    border-color: #ab5226;
+    background-color: #eb6f31 !important;
+    border-color: #ab5226 !important;
   }
   .navbar .navbar-nav .dropdown-menu .dropdown-item {
-    color: #f6f5f5;
+    color: #f6f5f5 !important;
   }
   .navbar .navbar-nav .dropdown-menu .dropdown-item:hover,
   .navbar .navbar-nav .dropdown-menu .dropdown-item:focus,
   .navbar .navbar-nav .dropdown-menu .dropdown-item.active {
     
-    color: #000000;
-    background-color: #ab5226;
+    color: #000000 !important;
+    background-color: #ab5226 !important;
   }
   .navbar .navbar-nav .dropdown-menu .dropdown-divider {
-    border-top-color: #ab5226;
+    border-top-color: #ab5226 !important;
   }
   #link-dropdown{
     font-size: 13px;
     margin: 5px;
-    color: #000000;
-    background-color: #ffffff;
+    color: #000000 !important;
+    background-color: #ffffff !important;
   }
   .navbar .navbar-nav .nav-item.active .nav-link,
   .navbar .navbar-nav .nav-item.active .nav-link:hover,
@@ -198,15 +203,15 @@ select {
   .navbar .navbar-nav .nav-item.show .nav-link,
   .navbar .navbar-nav .nav-item.show .nav-link:hover,
   .navbar .navbar-nav .nav-item.show .nav-link:focus {
-    color: #000000;
-    background-color: #ffffff;
+    color: #000000 !important;
+    background-color: #ffffff !important;
   }
   .navbar .navbar-toggle {
-    border-color: #ab5226;
+    border-color: #ab5226 !important;
   }
   .navbar .navbar-toggle:hover,
   .navbar .navbar-toggle:focus {
-    background-color: #ab5226;
+    background-color: #ab5226 !important;
   }
   .navbar .navbar-toggle .navbar-toggler-icon {
     color: #f6f5f5;

@@ -7,8 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <h2><b>INICIO DE S
-                        ESIÓN ALUMNO</b></h2>
+                    <h2><b>BIENVENIDO ALUMNO </b></h2>
                 </div>
                 <div class="card-body">
 

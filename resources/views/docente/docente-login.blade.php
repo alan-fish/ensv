@@ -6,11 +6,11 @@
     <div class="row justify-content-md-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center">
-                    <h2>Bienvenido incio de sesión para personal Docente</h2>
+            <div class="card-header text-center">
+                    <h2><b>BIENVENIDO DOCENTE </b></h2>
                 </div>
                 <div class="card-body">
-
+                
                     <form class="login-form" method="POST" action="{{ route('docente.login.submit') }}" >
                         @csrf
                     
@@ -42,17 +42,16 @@
                                 @enderror
                         </div>
 
-                        <div class="">                          
+                        <div class="form-group">                          
                             <button type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
                                 INICIAR SESIÓN
                             </button>
-                                    <a class="btn btn-link" href="#">
-                                        ¿Haz olvidado tu contraseña?
-                                    </a>
+                            <a class="btn btn-link" href="#">
+                                ¿Haz olvidado tu contraseña?
+                            </a>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

@@ -85,7 +85,7 @@
                                 <tr>
                                     <td><b>PERFIL ACADEMICO<b></td>
                                     <td>        
-                                        <select onChange="mostrarTR(this.value);" class="custom-select">
+                                        <select id="selectFocus" onChange="mostrarTR(this.value);" class="custom-select">
                                             <option value="">¿Qué información deseas ver?</option>
                                             <option value="licenciatura">VER LICENCIATURAS</option>
                                             <option value="maestria">VER MAESTRÍAS</option>

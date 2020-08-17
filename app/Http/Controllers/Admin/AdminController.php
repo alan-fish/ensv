@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+
+//Validaciones 
 use App\Http\Requests\AdminRequest;
-use App\Http\Requests\AdminRequest1;
+use App\Http\Requests\AdminEditAlumnoRequest;
+
 use App\Http\Requests\AdminDocenteRequest;
+use App\Http\Requests\AdminEditDocenteRequest;
+
+use App\Http\Requests\AdminHorarioRequest;
+use App\Http\Requests\AdminEditHorarioRequest;
+
 
 use App\Docente;
 use App\Alumno;
@@ -112,7 +120,7 @@ class AdminController extends Controller
                                                                                                 'grupos' => $grupos]);
     }
 
-    public function  updatealumno(AdminRequest1 $request, $id)
+    public function  updatealumno(AdminEditAlumnoRequest $request, $id)
     {   
         //En esta función necesito checar las reglas y sus mensajes
         $datosalumno= request()->except(['_token', '_method', 'password']);
@@ -189,7 +197,7 @@ class AdminController extends Controller
 
 /*Tengo que hacer el request para este metodo*/
 
-    public function  update_docente(Request $request, $id)
+    public function  update_docente(AdminEditDocenteRequest $request, $id)
     {
         $datos_docente= request()->except(['_token', '_method', 'password']);
         
@@ -199,7 +207,7 @@ class AdminController extends Controller
         return view('/admin/edit-docente',compact('message'))->with('docentes', $docentes);
     }
 
-//Horarios
+//Horarios--------------------------------------------------------------------------------------------------------------------
 
     public function horario()
     {
@@ -222,12 +230,12 @@ class AdminController extends Controller
  
     }
 
-    public function createhorario(Request $request)
+    public function createhorario(AdminHorarioRequest $request)
     {   
 
-          $horario = request()->all();
+        $horario = request()->all();
         
-           horario::create([
+        horario::create([
            'licenciatura_id' => $horario ['licenciatura_id'],
            'ciclo_id' => $horario ['ciclo_id'],
            'grupo_id' => $horario ['grupo_id'],
@@ -235,9 +243,9 @@ class AdminController extends Controller
            'hora' => $horario ['hora'],
            'materia_id' => $horario ['materia_id'],
            'docente_id' => $horario ['docente_id'],
-           ]);
+        ]);
 
-            return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
+        return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
     }
 
     public function consultarhorario(Request $request)
@@ -287,7 +295,7 @@ class AdminController extends Controller
                                                                                       
     }
 
-    public function  updateHorario(Request $request, $id)
+    public function  updateHorario(AdminEditHorarioRequest $request, $id)
     {
         //En esta función necesito checar las reglas y sus mensajes
         $horaioActualizar= request()->except(['_token', '_method']);
@@ -340,7 +348,7 @@ class AdminController extends Controller
 
 
 
-//Datos generales para cada carrera 
+//Datos generales para cada carrera -----------------------------------------------------------------------------------
     public function createLicenciatura(Request $request)
     {
         $licenciaturas = Licenciatura::all();
@@ -360,16 +368,20 @@ class AdminController extends Controller
         $mate = $request->get('materia');
         $sem = $request->get('semestre');
         
-
         
         if((isset ($cic))){
             ciclo::create(['ciclo' => $cic]);
             return redirect()->route('admin.createLicenciatura')->with('info', '¡Ciclo escolar guardado correctamente!');
         }
+        if(is_null($cic)){
+            
+        }
+
         if((isset ($grp))){
             grupo::create(['grupo' => $grp]);
             return redirect()->route('admin.createLicenciatura')->with('info', '¡Grupo guardado correctamente!');
         }
+    
         if((isset ($licen))){
             Licenciatura::create(['carrera' => $licen]);
             return redirect()->route('admin.createLicenciatura')->with('info', '¡Licenciatura guardada correctamente!');
@@ -380,6 +392,10 @@ class AdminController extends Controller
                              'semestre' => $sem]);
             return redirect()->route('admin.createLicenciatura')->with('info', '¡Materia guardada correctamente!'); 
         }
+
+        else{
+            return redirect()->route('admin.createLicenciatura')->with('info2', '¡Por favor llene los campos que dejo vacios!');
+        }
     }
 
     public function consultartDatosLicenciatura(Request $request)
@@ -389,23 +405,23 @@ class AdminController extends Controller
         $consulta =$request->get('buscarConsulta');
         
         if($consulta == 'Ciclo'){
-            $ciclos = Ciclo::paginate(4);            
+            $ciclos = Ciclo::paginate(6);            
             return view ('admin/consultarDatos')->with(['ciclos' => $ciclos]);
         }
 
         if($consulta == 'Grupo'){
-            $grupos = Grupo::paginate(4);
+            $grupos = Grupo::paginate(6);
             return view ('admin/consultarDatos')->with(['grupos' => $grupos ]);;
         }
 
         if($consulta == 'Licenciatura'){
-            $licenciaturas = Licenciatura::paginate(4);
+            $licenciaturas = Licenciatura::paginate(6);
             return view ('admin/consultarDatos')->with(['licenciaturas' => $licenciaturas]);
         }  
         if($consulta == 'Materias'){
             $materias = DB::table('licenciaturas')
                            ->join('materias', 'materias.licenciatura_id', '=', 'licenciaturas.id')
-                           ->paginate(5);
+                           ->paginate(6);
             return view ('admin/consultarDatos')->with(['materias' => $materias]);
         }          
        
@@ -429,6 +445,14 @@ class AdminController extends Controller
         return view('/admin/editDatos',compact('message'))->with('ciclos', $ciclo);
     }
 
+    public function borrarCiclo(Request $request, $id)
+    {
+        $Ciclo = Ciclo::findOrFail($id);
+        $Ciclo->delete();
+        $message="Ciclo eliminado correctamente";
+        return view ('admin/consultarDatos', compact('message'));
+    }
+
     public function editLic($id)
     {
         $licenciatura = Licenciatura::findOrFail($id);
@@ -443,6 +467,14 @@ class AdminController extends Controller
         $message="Información actualizada correctamente";
         $licenciatura = Licenciatura::findOrFail($id);
         return view('/admin/editLic',compact('message'))->with('licenciatura', $licenciatura);
+    }
+
+    public function borrarLic(Request $request, $id)
+    {
+        $Licenciatura = Licenciatura::findOrFail($id);
+        $Licenciatura->delete();
+        $message="Licenciatura eliminada correctamente";
+        return view ('admin/consultarDatos', compact('message'));
     }
 
     public function editGrup($id)
@@ -461,6 +493,13 @@ class AdminController extends Controller
         return view('/admin/editGrup',compact('message'))->with('grupo', $grupo);
     }
 
+    public function borrarGrupo(Request $request, $id)
+    {
+        $Grupo = Grupo::findOrFail($id);
+        $Grupo->delete();
+        $message="Grupo eliminado correctamente";
+        return view ('admin/consultarDatos', compact('message'));
+    }
 
     public function editMat (Request $request, $id)
     {
@@ -489,6 +528,17 @@ class AdminController extends Controller
         return view('/admin/editMat',compact(['message','materia','matLicenciatura']))->with('licenciaturas',$licenciaturas);
 
     }
+
+    public function borrarMateria(Request $request, $id)
+    {
+        $Materia = Materia::findOrFail($id);
+        $Materia->delete();
+        $message="Materia eliminada correctamente";
+        return view ('admin/consultarDatos', compact('message'));
+    }
+
+
+    //Evaluación Docente
 
 }
 

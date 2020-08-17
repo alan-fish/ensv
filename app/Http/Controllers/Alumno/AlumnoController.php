@@ -41,16 +41,7 @@ class AlumnoController extends Controller
         return view('/alumno/menualumno');   
     }
 
-    public function perfil($id)
-    {
-        $alumno = Alumno::join('licenciaturas', 'alumnos.licenciatura_id', '=', 'licenciaturas.id')
-                        ->join('grupos', 'alumnos.grupos_id', '=', 'grupos.id')
-                        ->where('alumnos.id', '=', $id)
-                        ->select('grupos.grupo', 'licenciaturas.carrera')
-                        ->first();
-        return $alumno;
-        //return view('/alumno/perfil-alumno')->with('alumno', $alumno);
-    }
+
     public function perfilAlumno($id)
     {
         $alumno = Alumno::join('licenciaturas', 'alumnos.licenciatura_id', '=', 'licenciaturas.id')
@@ -112,22 +103,22 @@ class AlumnoController extends Controller
                             ->get();
 
         $horariosMartes = Horario::where('grupo_id', '=', $id)
-                    ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-                    ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-                    ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                    ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-                    ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                    ->select('horarios.id',
-                            'licenciaturas.carrera',
-                            'grupos.grupo', 
-                            'horarios.dia',
-                            'horarios.hora',
-                            'materias.materia',
-                            'docentes.apellido1','docentes.apellido2',
-                            'docentes.nombre')
-                            ->where('horarios.dia', '=','Martes')
-                            ->orderBy('id')
-                            ->get();
+                            ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                            ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                            ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                            ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                            ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                            ->select('horarios.id',
+                                    'licenciaturas.carrera',
+                                    'grupos.grupo', 
+                                    'horarios.dia',
+                                    'horarios.hora',
+                                    'materias.materia',
+                                    'docentes.apellido1','docentes.apellido2',
+                                    'docentes.nombre')
+                                    ->where('horarios.dia', '=','Martes')
+                                    ->orderBy('id')
+                                    ->get();
 
         $horariosMiercoles = Horario::where('grupo_id', '=', $id)
                             ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
@@ -148,12 +139,12 @@ class AlumnoController extends Controller
                                     ->get();
 
         $horariosJueves = Horario::where('grupo_id', '=', $id)
-                                    ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-                                    ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-                                    ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                                    ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-                                    ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                                    ->select('horarios.id',
+                                ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                                ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                                ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                                ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                                ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                                ->select('horarios.id',
                                             'licenciaturas.carrera',
                                             'grupos.grupo', 
                                             'horarios.dia',
@@ -166,12 +157,12 @@ class AlumnoController extends Controller
                                             ->get();
 
         $horariosViernes = Horario::where('grupo_id', '=', $id)
-                                            ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-                                            ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-                                            ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                                            ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-                                            ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                                            ->select('horarios.id',
+                                    ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                                    ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                                    ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                                    ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                                    ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                                    ->select('horarios.id',
                                                     'licenciaturas.carrera',
                                                     'grupos.grupo', 
                                                     'horarios.dia',

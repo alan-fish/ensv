@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 
-class AdminDocenteRequest extends FormRequest
+class AdminEditDocenteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,22 +32,20 @@ class AdminDocenteRequest extends FormRequest
             'fecha_ingreso' => 'required',
             'licenciatura' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
-
     public function messages()
     {
         return [
-            'apellido1.required' => 'Hace falta llenar el campo apellido paterno.',
-            'apellido2.required' => 'Hace falta llenar el campo apellido paterno.',
-            'nombre.required' => 'Hace falta el campo nombre.',
-            'estado.required' => 'Hace falta llenar el campo estado.',
-            'licenciatura.required' => 'Hace falta llenar el campo de licenciatura',
-            'fecha_ingreso.required' => 'Hace falta llenar el campo fecha de ingreso.',
-            'email.required' => 'Hace falta llenar el campo email.',
-            'password.required' => 'Hace falta llenar el campo password.',
-            'password.confirmed' => 'Hay un error de llenado en la confirmación de contraseña.',
+            'apellido1.required' => 'No se puede enviar el apellido paterno vacío.',
+            'apellido2.required' => 'No se puede enviar el apellido materno vacío.',
+            'nombre.required' => 'No se puede enviar el campo nombre vacío.',
+            'estado.required' => 'No se puede enviar el estado laboral vacío',
+            'fecha_ingreso.required' => 'No se puede enviar la fecha de ingreso vacía',
+            'licenciatura.required' => 'No se puede enviar la licenciatura vacía',
+            'email.required' => 'No se puede enviar el campo campo email vacío.',
+            'matricula.unique' => 'Matricula ya registrada',
+            'email.unique' => 'Correo ya registrado'
         ];
     }
 }

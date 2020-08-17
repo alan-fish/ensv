@@ -70,51 +70,51 @@ class DocenteController extends Controller
     public function horarioGrupo($id)
     {   
         $horarios = Horario::where('docente_id', '=', $id)
-        ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-        ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-        ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-        ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-        ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-        ->select('grupos.id',
-                'licenciaturas.carrera',
-                'grupos.grupo', 
-                'horarios.dia',
-                'horarios.hora',
-                'materias.materia')
-                ->where('horarios.dia', '=','Lunes')
-                ->get();
+                    ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                    ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                    ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                    ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                    ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                    ->select('grupos.id',
+                            'licenciaturas.carrera',
+                            'grupos.grupo', 
+                            'horarios.dia',
+                            'horarios.hora',
+                            'materias.materia')
+                            ->where('horarios.dia', '=','Lunes')
+                            ->get();
 
         $horariosMartes = Horario::where('docente_id', '=', $id)
-        ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-        ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-        ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-        ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-        ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-        ->select('grupos.id',
-                'licenciaturas.carrera',
-                'grupos.grupo', 
-                'horarios.dia',
-                'horarios.hora',
-                'materias.materia')
-                ->where('horarios.dia', '=','Martes')
-                ->orderBy('id')
-                ->get();
+                        ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                        ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                        ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                        ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                        ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                        ->select('grupos.id',
+                                'licenciaturas.carrera',
+                                'grupos.grupo', 
+                                'horarios.dia',
+                                'horarios.hora',
+                                'materias.materia')
+                                ->where('horarios.dia', '=','Martes')
+                                ->orderBy('id')
+                                ->get();
 
         $horariosMiercoles = Horario::where('docente_id', '=', $id)
-                ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-                ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-                ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-                ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                ->select('grupos.id',
-                        'licenciaturas.carrera',
-                        'grupos.grupo', 
-                        'horarios.dia',
-                        'horarios.hora',
-                        'materias.materia')
-                        ->where('horarios.dia', '=','Miercoles')
-                        ->orderBy('id')
-                        ->get();
+                        ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                        ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                        ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                        ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                        ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                        ->select('grupos.id',
+                                'licenciaturas.carrera',
+                                'grupos.grupo', 
+                                'horarios.dia',
+                                'horarios.hora',
+                                'materias.materia')
+                                ->where('horarios.dia', '=','Miercoles')
+                                ->orderBy('id')
+                                ->get();
 
         $horariosJueves = Horario::where('docente_id', '=', $id)
                         ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
@@ -133,20 +133,20 @@ class DocenteController extends Controller
                                 ->get();
 
         $horariosViernes = Horario::where('docente_id', '=', $id)
-                                ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
-                                ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
-                                ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                                ->join('materias', 'horarios.materia_id', '=', 'materias.id')
-                                ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
-                                ->select('grupos.id',
-                                        'licenciaturas.carrera',
-                                        'grupos.grupo', 
-                                        'horarios.dia',
-                                        'horarios.hora',
-                                        'materias.materia')
-                                        ->where('horarios.dia', '=','Viernes')
-                                        ->orderBy('id')
-                                        ->get();
+                        ->join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                        ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                        ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                        ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                        ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                        ->select('grupos.id',
+                                'licenciaturas.carrera',
+                                'grupos.grupo', 
+                                'horarios.dia',
+                                'horarios.hora',
+                                'materias.materia')
+                                ->where('horarios.dia', '=','Viernes')
+                                ->orderBy('id')
+                                ->get();
 
         return View('/docente/horario')->with(['horarios' => $horarios, 'horariosMartes' => $horariosMartes,
                                                 'horariosMiercoles' => $horariosMiercoles,
@@ -157,11 +157,6 @@ class DocenteController extends Controller
 
     public function grupos($id)
     {  
-       /* $grupos = Horario::join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
-                    ->select('grupos.id','grupos.grupo')
-                    ->where('docente_id', '=', $id)
-                    ->first();*/
-
         $grupos = Grupo::join('alumnos', 'grupos.id', '=', 'alumnos.grupo_id')
                 ->where('grupos.id', '=', $id)
                 ->select(

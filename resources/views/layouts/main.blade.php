@@ -24,21 +24,48 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <!-- Brand/logo -->
-            <a class="navbar-brand" href="#">
-            <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:45px;">
-            </a>  
-            <a class="navbar-brand" href="#">ENSV</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-              
-            <div class="collapse navbar-collapse" id="navbarsExample07">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+  
+        <a class="navbar-brand" href="">
+          <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:45px;">
+          </a>  
+          <a class="navbar-brand" href="">ENSV</a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample07">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item ">
+                  <a class="nav-link" href="{{ route('inicio') }}">
+                      <b>INICIO</b>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">
+                      <b>
+                          CONTACTO
+                      </b>
+                  </a>
+                </li>
+            </ul>
+			      <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown active">
+              <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <B>INICIAR SESIÓN</B>
+              </a>
+              <div class="dropdown-menu " aria-labelledby="dropdown07">
+              <a  class="dropdown-item" href="{{ route('alumno.login') }}"><i class="fas fa-sign-in-alt"></i> ALUMNO</a>
+                <a  class="dropdown-item" href="{{ route('docente.login') }}"><i class="fas fa-sign-in-alt"></i> DOCENTE</a>
 
-            </div>
-     </nav>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 
         <main class="py-4">

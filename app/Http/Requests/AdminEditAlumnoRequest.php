@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Validator;
 
-class AdminDocenteRequest extends FormRequest
+class AdminEditAlumnoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,11 +28,12 @@ class AdminDocenteRequest extends FormRequest
             'apellido1' => 'required',
             'apellido2' => 'required',
             'nombre' => ['required', 'string', 'max:255'],
-            'estado' => 'required',
-            'fecha_ingreso' => 'required',
-            'licenciatura' => 'required',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'matricula' => 'required',
+            'sexo' => 'required',
+            'curp' => 'required',
+            'licenciatura_id' => 'required',
+            'grupo_id' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:docentes'],
         ];
     }
 
@@ -40,14 +41,18 @@ class AdminDocenteRequest extends FormRequest
     {
         return [
             'apellido1.required' => 'Hace falta llenar el campo apellido paterno.',
-            'apellido2.required' => 'Hace falta llenar el campo apellido paterno.',
+            'apellido2.required' => 'Hace falta llenar el campo apellido materno.',
             'nombre.required' => 'Hace falta el campo nombre.',
-            'estado.required' => 'Hace falta llenar el campo estado.',
-            'licenciatura.required' => 'Hace falta llenar el campo de licenciatura',
-            'fecha_ingreso.required' => 'Hace falta llenar el campo fecha de ingreso.',
+            'matricula.required' => 'Hace falta llenar el campo matricula.',
+            'sexo.required' => 'Hace falta seleccionar el campo de sexo.',
+            'curp.required' => 'Hace falta llenar el campo curp.',
+            'grupo_id.required' => 'Hace falta seleccionar el campo de grupo.',
+            'licenciatura_id.required' => 'Hace falta seleccionar el campo de Licenciatura.',
             'email.required' => 'Hace falta llenar el campo email.',
             'password.required' => 'Hace falta llenar el campo password.',
             'password.confirmed' => 'Hay un error de llenado en la confirmación de contraseña.',
+            'matricula.unique' => 'Matricula ya registrada',
+            'email.unique' => 'Correo ya registrado'
         ];
     }
 }

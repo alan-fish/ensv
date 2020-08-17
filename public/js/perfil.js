@@ -1,4 +1,14 @@
 function mostrarTR(id){ 
+
+    $("#licenciatura").hide();
+    $("#licenciatura1").hide();
+    $("#licenciatura2").hide();
+    $("#maestria").hide();
+    $("#maestria1").hide();
+    $("#maestria2").hide();
+    $("#doctorado").hide();
+    $("#doctorado1").hide();
+    $("#doctorado2").hide();
     
     if (id == "licenciatura") {
         $("#licenciatura").show();

@@ -15,7 +15,7 @@
      <script src="https://kit.fontawesome.com/3a6532c246.js" crossorigin="anonymous"></script>
     <!--Estilo-->
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/estilo-docentes.css') }}">
+  
     <title>ENSV</title>
 
 </head>

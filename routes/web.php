@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view ('inicio');
-});
+})->name('inicio');
 
+Route::get('/contacto', function () {
+    return view ('contacto');
+})->name('contacto');
 
 Auth::routes();
 
@@ -53,18 +56,27 @@ Route::get('/admin/datosLicenciatura', 'Admin\AdminController@createLicenciatura
 Route::post('/admin/datosLicenciatura', 'Admin\AdminController@storeLicenciatura')->name('admin.storeDatos');
 //Consultar
 Route::get('/admin/consultarDatos', 'Admin\AdminController@consultartDatosLicenciatura')->name('admin.consutarDatosLicenciatura');
-//EditarCiclo y actualizar
+//Editar Ciclo y actualizar
 Route::get('/admin/{id}/editDatos', 'Admin\AdminController@editDatos')->name('admin.editDatos');
 Route::put('/admin/{id}/editDatos', 'Admin\AdminController@updateDatos')->name('admin.updateDatos');
+//Eliminar Ciclo
+Route::get('/admin/{id}/borrarCiclo', 'Admin\AdminController@borrarCiclo')->name('admin.borrarCiclo');
 //Editar Licenciatura y actualizar
 Route::get('/admin/{id}/editLic', 'Admin\AdminController@editLic')->name('admin.editLic');
 Route::put('/admin/{id}/editLic', 'Admin\AdminController@updateLic')->name('admin.updateLic');
+//Eliminar Licenciatura
+Route::get('/admin/{id}/borrarLic', 'Admin\AdminController@borrarLic')->name('admin.borrarLic');
 //Editar Grupos y actualizar
 Route::get('/admin/{id}/editGrup', 'Admin\AdminController@editGrup')->name('admin.editGrup');
 Route::put('/admin/{id}/editGrup', 'Admin\AdminController@updateGrup')->name('admin.updateGrup');
+//Eliminar Grupo
+Route::get('/admin/{id}/borrarGrupo', 'Admin\AdminController@borrarGrupo')->name('admin.borrarGrupo');
 //Editar Materias y actualizar
 Route::get('/admin/{id}/editMat', 'Admin\AdminController@editMat')->name('admin.editMat');
 Route::put('/admin/{id}/editMat', 'Admin\AdminController@updateMat')->name('admin.updateMat');
+//Eliminar Materia
+Route::get('/admin/{id}/borrarMateria', 'Admin\AdminController@borrarMateria')->name('admin.borrarMateria');
+
 
 // Alumno
 //Rutas de inicio y cierre de sesión
