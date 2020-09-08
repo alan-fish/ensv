@@ -100,6 +100,7 @@ class AlumnoController extends Controller
                                 'docentes.apellido1', 'docentes.apellido2',
                                 'docentes.nombre')
                             ->where('horarios.dia', '=','Lunes')
+                            ->orderBy('id')
                             ->get();
 
         $horariosMartes = Horario::where('grupo_id', '=', $id)

@@ -129,7 +129,7 @@
                                 {{ $horarioMartes->materia}}  
                                 </td>
                                 <td>
-                                <a  style="width:90px" href="{{ route('docente.grupos', $horario->id) }}" 
+                                <a  style="width:90px" href="{{ route('docente.grupos', $horarioMartes->id) }}" 
                                     class="btn btn-sm my-sm-1 btn-outline-dark"> 
                                     <i class="fas fa-clipboard-list"></i> LISTA
                                 </a>
@@ -167,7 +167,7 @@
                                 {{ $horarioMiercoles->materia}}  
                                 </td>
                                 <td>
-                                <a  style="width:90px" href="{{ route('docente.grupos', $horario->id) }}" 
+                                <a  style="width:90px" href="{{ route('docente.grupos', $horarioMiercoles->id) }}" 
                                     class="btn btn-sm my-sm-1 btn-outline-dark"> 
                                     <i class="fas fa-clipboard-list"></i> LISTA
                                 </a>
@@ -190,22 +190,22 @@
                             <th>ALUMNOS</th>
                         </thead>                
                         <tbody >
-                            @foreach($horariosJueves as $horarioJueves) 
+                            @foreach($horariosJueves as $horariosJueves) 
                             <tr>
                                 <td>
-                                {{ $horarioMiercoles->carrera}}  
+                                {{ $horariosJueves->carrera}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->grupo}}  
+                                {{ $horariosJueves->grupo}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->hora}}  
+                                {{ $horariosJueves->hora}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->materia}}  
+                                {{ $horariosJueves->materia}}  
                                 </td>
                                 <td>
-                                <a  style="width:90px" href="{{ route('docente.grupos', $horario->id) }}" 
+                                <a  style="width:90px" href="{{ route('docente.grupos', $horariosJueves->id) }}" 
                                     class="btn btn-sm my-sm-1 btn-outline-dark"> 
                                     <i class="fas fa-clipboard-list"></i> LISTA
                                 </a>
@@ -228,31 +228,34 @@
                             <th>ALUMNOS</th>
                         </thead>                
                         <tbody >
-                            @foreach($horariosViernes as $horarioViernes) 
+                            @foreach($horariosViernes as $horariosViernes) 
                             <tr>
                                 <td>
-                                {{ $horarioMiercoles->carrera}}  
+                                {{ $horariosViernes->carrera}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->grupo}}  
+                                {{ $horariosViernes->grupo}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->hora}}  
+                                {{ $horariosViernes->hora}}  
                                 </td>
                                 <td>
-                                {{ $horarioMiercoles->materia}}  
+                                {{ $horariosViernes->materia}}  
                                 </td>
                                 <td>
-                                <a  style="width:90px" href="{{ route('docente.grupos', $horario->id) }}" 
+                                <a  style="width:90px" href="{{ route('docente.grupos', $horariosViernes->id) }}" 
                                     class="btn btn-sm my-sm-1 btn-outline-dark"> 
                                     <i class="fas fa-clipboard-list"></i> LISTA
-                                </a> 
+                                </a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>               
+                </div>
+
+
+                              
             </div>
 
         </div>

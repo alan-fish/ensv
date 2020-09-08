@@ -157,7 +157,7 @@
 
                     <tr>
                       <td>
-                        {{ $alumno-> grupo}}                        
+                          {{ $alumno-> grupo}}                        
                         </td>
                         <td>
                             {{ $alumno->apellido1 }}
@@ -170,8 +170,7 @@
                             {{ $alumno-> nombre}}                         
                         </td>
                         <td>
-                            {{ $alumno-> matricula}}
-                            {{ $alumno-> id}}                             
+                            {{ $alumno-> matricula}}                        
                         </td>
                         <td>
                         <a href="{{ route('admin.edit_alumno', $alumno->id) }}" class="btn btn-warning btn-sm"> <i class="fas fa-edit"></i>Editar</a>
@@ -180,7 +179,7 @@
                     @endforeach
                 </tbody>
         </table>
-        {{ $alumnos->links()}} 
+        {{ $alumnos->appends(request()->query())->links()}} 
         @endif 
         </div>
         

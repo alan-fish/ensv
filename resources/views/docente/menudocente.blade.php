@@ -77,7 +77,7 @@
   </div>
   <div class="accordion-item">
     <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\evaluacion.png') }}"  alt="" width="70" height="70" />
-        GRUPOS
+    EVALUACIÓN
     </div>
     <div class="accordion-item-body">
       <div class="accordion-item-body-content">

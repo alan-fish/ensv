@@ -65,6 +65,7 @@
                                 <td>{{ $grupos->apellido2}}</td>
                                 <td>{{ $grupos->nombre}}</td>
                                 <td>{{ $grupos->matricula}}</td>
+                                <td>{{ $grupos->id}}</td>
                             </tr>
                           @endforeach
                         </tbody>

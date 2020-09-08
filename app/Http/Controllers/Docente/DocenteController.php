@@ -148,11 +148,14 @@ class DocenteController extends Controller
                                 ->orderBy('id')
                                 ->get();
 
-        return View('/docente/horario')->with(['horarios' => $horarios, 'horariosMartes' => $horariosMartes,
-                                                'horariosMiercoles' => $horariosMiercoles,
-                                                'horariosJueves' => $horariosJueves,
-                                                'horariosViernes' => $horariosViernes
-                                                ]);
+       $dias = [$horarios, $horariosMartes, $horariosMiercoles, $horariosJueves, $horariosViernes];
+       //return $dias; 
+       return view('/docente/horario', compact('horarios', 'horariosMartes','horariosMiercoles', 'horariosJueves', 'horariosViernes'));
+       /* return View('/docente/horario')->with(['horarios' => $horarios, 'horariosMartes' => $horariosMartes,
+        'horariosMiercoles' => $horariosMiercoles,
+        'horariosJueves' => $horariosJueves,
+        'horariosViernes' => $horariosViernes
+        ]); */
     }
 
     public function grupos($id)

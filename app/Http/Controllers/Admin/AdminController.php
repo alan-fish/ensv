@@ -195,7 +195,6 @@ class AdminController extends Controller
         return view('/admin/edit-docente')->with('docentes', $docentes);
     }
 
-/*Tengo que hacer el request para este metodo*/
 
     public function  update_docente(AdminEditDocenteRequest $request, $id)
     {
@@ -261,7 +260,7 @@ class AdminController extends Controller
         if((isset ($cic)) && (isset ($grp)) && (isset ($carrera)) ){
         $data = [$cic, $grp, $carrera];
         $horarios = Horario::horarios($data)
-                    ->orderBy('dia')
+                    ->orderBy('id')
                     ->paginate(5);
         return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])
                     ->with('horarios', $horarios);

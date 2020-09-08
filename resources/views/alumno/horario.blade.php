@@ -88,7 +88,7 @@
                         <tbody >
                             @foreach($horarios as $horario) 
                             <tr>
-                                <td>
+                                <td style="width:100px">
                                     {{ $horario->hora}}  
                                 </td>
                                 <td>
@@ -117,10 +117,10 @@
                         <tbody >
                             @foreach($horariosMartes as $horarioMartes) 
                             <tr>
-                                <td>
+                                <td style="width:100px">
                                     {{ $horarioMartes->hora}}  
                                 </td>
-                                <td>
+                                <td >
                                     {{ $horarioMartes->materia}}  
                                 </td>
                                 <td>
