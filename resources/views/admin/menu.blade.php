@@ -6,7 +6,7 @@
       <div class="container">
   
         <a class="navbar-brand" href="">
-          <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:45px;">
+          <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:40px;">
           </a>  
           <a class="navbar-brand" href="">ENSV</a>
   
@@ -15,13 +15,15 @@
         </button>
   
         <div class="collapse navbar-collapse" id="navbarsExample07">
+
             <ul class="navbar-nav mr-auto">
+
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('admin.menu') }}">
                         <b>INICIO</b>
                     </a>  
                 </li>
-                <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item dropdown ">
                     <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <B>DOCENTE</B>
@@ -35,9 +37,8 @@
                     </a>
                   </div>
                   </li>
-                </ul>
+                
 
-                <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown ">
                     <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <B>ALUMNO</B>
@@ -51,9 +52,7 @@
                     </a>
                   </div>
                   </li>
-                </ul>
 
-                <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown ">
                     <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <B>HORARIOS</B>
@@ -67,10 +66,8 @@
                     </a>
                   </div>
                   </li>
-                </ul>
-
-                <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown ">
+              
+                  <li class="nav-item dropdown ">
                     <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <B>DATOS GENERALES</B>
                     </a>
@@ -83,9 +80,15 @@
                     </a>
                   </div>
                   </li>
-                </ul>
+         
+
+                  <a class="nav-link" href="{{ route('admin.menu') }}">
+                        <b>EVALUACIÓN DOCENTE</b>
+                    </a>  
 
             </ul>
+
+
 			      <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown ">
                   <a href="" class="nav-link dropdown-toggle"  id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
