@@ -2,12 +2,11 @@
 
 @section('content')
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-  
-        <a class="navbar-brand" href="">
-          <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:45px;">
-          </a>  
-          <a class="navbar-brand" href="">ENSV</a>
+    <div class="container">
+      <a class="navbar-brand" href="">
+        <img src="{{ URL::to('assets\img\favicon.png') }}" alt="logo" style="width:45px;">
+      </a>  
+      <a class="navbar-brand" href="">ENSV</a>
   
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -214,8 +213,6 @@
                 </div>     
             </form>
            
-
-
          </div>
         </div>
     </div>

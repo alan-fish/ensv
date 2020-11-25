@@ -82,7 +82,7 @@
                   </li>
          
 
-                  <a class="nav-link" href="{{ route('admin.menu') }}">
+                  <a class="nav-link" href="{{ route('admin.evaluacion') }}">
                         <b>EVALUACIÓN DOCENTE</b>
                     </a>  
 
@@ -104,8 +104,8 @@
         </div>
       </div>
     </nav>
+<br>
 
-<BR>
 <div class="container" id="container-resgistroalumno">
     
     <link rel="stylesheet" href="{{ asset('css/horari.css') }}" />

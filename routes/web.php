@@ -77,6 +77,31 @@ Route::put('/admin/{id}/editMat', 'Admin\AdminController@updateMat')->name('admi
 //Eliminar Materia
 Route::get('/admin/{id}/borrarMateria', 'Admin\AdminController@borrarMateria')->name('admin.borrarMateria');
 
+//Evaluación Docente
+Route::get('/admin/evaluacion', 'Admin\AdminController@evaluacion')->name('admin.evaluacion');
+
+//Crear categorias
+Route::get('/admin/evaluacion/crear/categoria', 'Admin\AdminController@createCategoria')->name('admin.createCategoria');
+Route::post('/admin/evaluacion/crear/categoria', 'Admin\AdminController@storeCategoria')->name('admin.storeCategoria');
+//Editar categoría
+Route::get('/admin/evaluacion/verCategorias', 'Admin\AdminController@consultartCategorias')->name('admin.consultartCategorias');
+
+Route::get('/admin/evaluacion/{id}/editCategorias', 'Admin\AdminController@editCategoria')->name('admin.editCategoria');
+Route::put('/admin/evaluacion/{id}/editCategorias', 'Admin\AdminController@updateCategoria')->name('admin.updateCategoria');
+//Eliminar categoría
+Route::get('/admin/evaluacion/{id}/borrarCategoria', 'Admin\AdminController@deleteCategoria')->name('admin.deleteCategoria');
+
+
+//Crear preguntas
+Route::get('/admin/evaluacion/crear/pregunta', 'Admin\AdminController@createPregunta')->name('admin.createPregunta');
+Route::post('/admin/evaluacion/crear/pregunta', 'Admin\AdminController@storePregunta')->name('admin.storePregunta');
+//Editar pregunta
+Route::get('/admin/evaluacion/verPreguntas', 'Admin\AdminController@consultartPreguntas')->name('admin.consultartPreguntas');
+
+Route::get('/admin/evaluacion/{id}/editPreguntas', 'Admin\AdminController@editPregunta')->name('admin.editPregunta');
+Route::put('/admin/evaluacion/{id}/editPreguntas', 'Admin\AdminController@updatePregunta')->name('admin.updatePregunta');
+//Eliminar pregunta
+Route::get('/admin/evaluacion/{id}/borrarPregunta', 'Admin\AdminController@deletePregunta')->name('admin.deletePregunta');
 
 // Alumno
 //Rutas de inicio y cierre de sesión

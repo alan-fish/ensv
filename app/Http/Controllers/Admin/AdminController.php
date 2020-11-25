@@ -25,6 +25,8 @@ use App\Grupo;
 use App\Materia;
 use App\Horario;
 use App\Licenciatura;
+use App\Categoria;
+use App\Pregunta;
 use DB;
 
 class AdminController extends Controller
@@ -347,7 +349,7 @@ class AdminController extends Controller
 
 
 
-//Datos generales para cada carrera -----------------------------------------------------------------------------------
+//Datos generales para cada carrera ------
     public function createLicenciatura(Request $request)
     {
         $licenciaturas = Licenciatura::all();
@@ -538,6 +540,127 @@ class AdminController extends Controller
 
 
     //Evaluación Docente
+
+    public function evaluacion (){
+        return view ('admin.evaluacion');
+        //return view();
+    }
+
+    public function createCategoria(){
+        return view ('/admin/categoria');
+    }
+
+    public function storeCategoria (Request $request){
+        $categoria = request()->all();
+        Categoria::create([
+            'categoria' => $categoria ['categoria']
+        ]);
+        return redirect()->route('admin.evaluacion')->with('info', '¡Categoría creada exitosamente!');
+    }
+
+
+    public function consultartCategorias (){
+        $listaCategorias = Categoria::all();
+
+        return view('/admin/lista_Categorias')->with(['categorias'=>$listaCategorias]); 
+    }
+
+    public function editCategoria($id)
+    {
+        $EditCategoria = Categoria::findOrFail($id);
+
+        return view('/admin/editCategorias')->with('categoria', $EditCategoria);
+    }
+
+    public function  updateCategoria(Request $request, $id)
+    {   
+        //En esta función necesito checar las reglas y sus mensajes
+        $datosCategoria= request()->except(['_token', '_method']);
+
+        Categoria::where('id', '=', $id)->update( $datosCategoria);
+        $message="Información actualizada correctamente";
+        $categoria = Categoria::findOrFail($id);
+        return view('/admin/editCategorias',compact('message'))->with('categoria', $categoria);
+    }
+
+    public function deleteCategoria(Request $request, $id)
+    {
+        $deletCategoria = Categoria::findOrFail($id);
+        $deletCategoria->delete();
+        $message="Materia eliminada correctamente";
+
+        $listaCategorias = Categoria::all();
+        return view('/admin/lista_Categorias')->with(['categorias'=>$listaCategorias]); 
+    }
+
+    //Para las preguntas
+
+    public function createPregunta(){
+        $listaCategorias = Categoria::all();
+        return view ('/admin/preguntas')->with(['categorias'=>$listaCategorias]); ;
+    }
+
+    public function storePregunta (Request $request){
+        
+        $pregunta = request()->all();
+        Pregunta::create([
+            'pregunta' => $pregunta ['pregunta'],
+            'categoria_id' => $pregunta['categoria_id']
+        ]);
+        return redirect()->route('admin.evaluacion')->with('info', '¡Categoría creada exitosamente!');
+    }
+
+
+    public function consultartPreguntas (){
+        //En este faltaría la realización de un scoope para buscar las preguntas por categoría
+        $preguntas = DB::table('categorias')
+                    ->join('preguntas', 'preguntas.categoria_id', '=', 'categorias.id')
+                    ->select('categorias.categoria',
+                             'preguntas.pregunta',
+                             'preguntas.id')
+                    ->paginate(10);
+
+        return view ('/admin/lista_preguntas')->with(['preguntas' => $preguntas]);
+    }
+
+    public function editPregunta($id)
+    {
+        $categorias = Categoria::all();
+        $pregunta = Pregunta::findOrFail($id);
+        $preguntaCategoria = $pregunta->categoria;
+
+        return view('/admin/editPreguntas',compact('pregunta','preguntaCategoria'))->with('categoria', $categorias);
+    }                                      
+
+    public function  updatePregunta(Request $request, $id)
+    {   
+        //En esta función necesito checar las reglas y sus mensajes
+        $editPregunta= request()->except(['_token', '_method']);
+
+        Pregunta::where('id', '=', $id)->update( $editPregunta);
+        $message="Información actualizada correctamente";
+        $pregunta = Pregunta::findOrFail($id);
+        $preguntaCategoria = $pregunta->categoria;
+        $categorias = Categoria::all();
+
+        return view('/admin/editPreguntas',compact('pregunta','preguntaCategoria'))->with('categoria', $categorias);
+    }
+
+    public function deletePregunta(Request $request, $id)
+    {
+        $Pregunta = Pregunta::findOrFail($id);
+        $Pregunta->delete();
+        $message="Pregunta eliminada correctamente";
+
+        $preguntas = DB::table('categorias')
+                    ->join('preguntas', 'preguntas.categoria_id', '=', 'categorias.id')
+                    ->select('categorias.categoria',
+                            'preguntas.pregunta',
+                            'preguntas.id')
+                    ->paginate(10);
+
+        return view ('/admin/lista_preguntas',compact('message'))->with(['preguntas' => $preguntas]);
+    }
 
 }
 

@@ -12,6 +12,9 @@ body{
 #container_menu{
   margin-top: 2px;
 }
+#container-evaluación{
+  margin-top: 150px;
+}
 
 .card{
   padding: 5px;
@@ -24,11 +27,34 @@ width: 100%;
 
 
 /*Diseño para las vistas de registro e e edición*/
-#div_registro{
-margin: 3px;
-font-size: 18px;
-font-weight: bold
+
+
+#div_evaluacion{
+  margin: 3px;
+  font-size: large;
+  font-weight: bold;
 }
+
+#h3_evaluacion{
+  margin-bottom: 30px;
+}
+
+#button_evaluacion{
+  border-radius: 15px;
+  background: #f5973d;
+  border-color:#f5973d;
+  color: #000000;
+  margin-top: 5px;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#div_registro{
+  margin: 3px;
+  font-size: 18px;
+  font-weight: bold
+  }
 
 select {
   height: 35px;
