@@ -180,7 +180,7 @@
               </div>
               <div class="accordion-item-body">
                 <div class="accordion-item-body-content">
-                    <a id="button_a" class="btn btn-lg btn-block" href="#" role="button">
+                    <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
                       <i class="fas fa-sign-in-alt"></i>  CONSULTAR
                     </a>
                     <a id="button_a" class="btn btn-lg btn-block " href="" role="button">

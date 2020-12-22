@@ -29,33 +29,19 @@ class AlumnoLoginController extends Controller
         ];
 
         $this->validate($request, [
-            'login' => 'required',
+            'email' => 'required|email',
             'password'  => 'required|min:8'
         ],$messages);;
 
-        $login_type = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL ) 
-        ? 'email' 
-        : 'matricula';
-
-         $request->merge([
-            $login_type => $request->input('login')
-         ]);
-
-        //Attempt to log the user in // aqui verifica esos datos
-        if(Auth::guard('alumno')->attempt($request->only($login_type, 'password'))){
-
-            //If successfull, then redirect to their intended location
-
+        if(Auth::guard('alumno')->attempt(['email' => $request->email, 'password' => $request->password])){
             return redirect()->intended(route('alumno.menu'));
         }
         //if unsuccessfull, then redirect back to the login with the form data
 
         return redirect()->back()
-        ->withInput()
-        ->withErrors([
-            'login' => 'Matrícula o correo electrónico incorrectos',
-            'password' => 'Contraseña incorrecta',
-        ]);// esto regresa el correo en su label
+        ->withInput($request->only('email'))->withErrors([
+            'password' => 'Contraseña incorrecta o Usuario incorrecto.',
+        ]);;// esto regresa el correo en su label
 
     }
 

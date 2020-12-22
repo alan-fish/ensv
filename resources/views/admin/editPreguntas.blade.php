@@ -105,15 +105,10 @@
       </div>
     </nav>
 
-    <div class="container" id="container-evaluación">
+<div class="container" id="container-evaluación">
   <div class="row justify-content-md-center col-12">
-        @if(session('info'))  
-        <div  class="alert alert-success alert-dismissible fade show">
-            {{session('info')}}
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-        </div>                              
-        @endif
-    <h3 style="font-weight: bold">CREAR UNA NUEVA PREGUNTAS</h3>
+
+    <h3 style="font-weight: bold">EDICIÓN DE PREGUNTAS</h3>
     @include ('layouts.error')
     <div class="card-body col-md-10">
 

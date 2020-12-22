@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -53,54 +52,48 @@
             </div>
         </div>
      </nav>
+<br>
+<br><br>
+<div class="container" >
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
 
-<link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
-<script src="{{ asset('js/horariojs.js') }}"></script>
-<script src="{{ asset('js/menus.js') }}"></script>
-<h1>MENÚ ALUMNO</h1>
+        <table class="table-responsive table table-hover">
+                <thead>      
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Nombre(s)</th>
+                    <th>ACCIÓN</th>
+                </thead>
+                    <tbody>
+                        @foreach($evaluar as $docente)
 
-<div class="accordion">
+                        <tr>
+                            <td>
+                                {{ $docente->apellido1 }}
+                            </td>
 
-  <div class="accordion-item">
-    <div class="accordion-item-header">
-      <img src="{{ URL::to('assets\img\perfil.png') }}"  alt="" width="70" height="70" />
-      PERFIL
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a"class="btn btn-lg btn-block" href="{{ route('alumno.perfilAlumno', Auth::user()->id) }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>VER PERFIL
-        </a>
-      </div>
-    </div>
-  </div>
+                            <td>
+                                {{ $docente->apellido2}}
+                            </td>
+                            <td>
+                                {{ $docente-> nombre}}
+                            </td>
+                            <td>
+                                  {{ $docente-> id}}
+                            <a href="{{ route('alumno.evaluarDocente', [Auth::user()->grupo_id, $docente-> id]) }}" class="btn btn-warning btn-sm"> 
+                                <i class="fas fa-edit"></i>
+                                    EVALUAR
+                            </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+            </table>
+          
+        
+            </div>
 
-  <div class="accordion-item">
-    <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\horario.png') }}"  alt="" width="70" height="70" />
-      HORARIO
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id]     ),  }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>  CONSULTAR HORARIO
-        </a>    
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion-item">
-    <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\evaluacion.png') }}"  alt="" width="70" height="70" />
-      EVALUACIÓN DOCENTE
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE
-        </a>
-        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.evaluacion',[Auth::user()->grupo_id, Auth::user()->licenciatura_id] ) }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE 1
-        </a>    
-      </div>
     </div>
   </div>
 </div>

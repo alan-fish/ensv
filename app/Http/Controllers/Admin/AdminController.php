@@ -611,16 +611,27 @@ class AdminController extends Controller
     }
 
 
-    public function consultartPreguntas (){
+    public function consultartPreguntas (Request $request){
         //En este faltaría la realización de un scoope para buscar las preguntas por categoría
-        $preguntas = DB::table('categorias')
+
+        $SeletCategorias = Categoria::all();
+
+        $BuscarCategoria = $request->get('Buscar_Categoria');
+        if((isset ($BuscarCategoria))){
+            $preguntas = Categoria::categorias($BuscarCategoria)->paginate(5);
+            return view('/admin/lista_preguntas',['SeletCategorias' => $SeletCategorias])->with('preguntas', $preguntas);
+        }
+        return view('/admin/lista_preguntas',['SeletCategorias' => $SeletCategorias]);
+
+
+       /* $preguntas = DB::table('categorias')
                     ->join('preguntas', 'preguntas.categoria_id', '=', 'categorias.id')
                     ->select('categorias.categoria',
                              'preguntas.pregunta',
                              'preguntas.id')
-                    ->paginate(10);
+                    ->paginate(10); */
 
-        return view ('/admin/lista_preguntas')->with(['preguntas' => $preguntas]);
+        
     }
 
     public function editPregunta($id)
@@ -660,6 +671,45 @@ class AdminController extends Controller
                     ->paginate(10);
 
         return view ('/admin/lista_preguntas',compact('message'))->with(['preguntas' => $preguntas]);
+    }
+
+    
+    public function prueba(){
+        //De esta manera estoy obteniendo los id de la tabla de categoria, ahora lo que quiero hacer es mostrar preguntas 
+        //de acuerdo a esa categorias en especifico
+        // Al hacer eso la variables evaluar se convierte en un arreglo de x numeros
+      /*  $evaluar = Preguntas::select('categorias.id')
+                            ->get(); */
+
+      /*  $evaluar = Pregunta::join('categorias', 'preguntas.categoria_id', '=', 'categorias.id')
+                            ->select('preguntas.pregunta','categorias.categoria')
+                            ->paginate(3); 
+                            */
+       // $int = count ($evaluar);
+
+        //return $int;
+
+        $bandera = false;
+
+        $evaluar = Pregunta::join('categorias', 'preguntas.categoria_id', '=', 'categorias.id')
+                            ->select('categorias.id', 'preguntas.pregunta','categorias.categoria')
+                            ->where('categorias.id', '=', '1')
+                            ->orderBy('id')
+                            ->get();
+        $int = count ($evaluar);
+
+       // necesito corregir el error de links y hacer un tipo bandera cada vezx quye se conteste una evaluacion
+      //  return $int;
+
+       // return  $evaluar; 
+        //return $evaluar2;
+      return view ('admin.prueba',compact('evaluar'));
+    }
+
+        
+    public function StorePrueba(){
+        $data= request()->except(['_token', '_method']);
+        return $data;
     }
 
 }

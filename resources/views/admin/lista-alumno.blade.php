@@ -104,14 +104,11 @@
 <br>
 <br>
 <br>
-
-
-
 <div class="container" id="container-resgistroalumno">
   <div class="row justify-content-md-center">
     <div class="col-md-10">
 
-      <div class="card-header">
+  
           <h2><B>ALUMNOS ENSV</B></h2>
           <h5>Buscar por...</h5>
           <nav>

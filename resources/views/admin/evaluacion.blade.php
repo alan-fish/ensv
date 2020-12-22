@@ -112,13 +112,18 @@
 
       <div id="div_evaluacion" class=" col-md-10">
         <h4 class="text-center">CATEGORÍAS</h4>
-        <a  id="button_cancelar" class="btn btn-outline-primary btn-block"  href="{{ route ('admin.createCategoria') }}" role="button">
+
+        <a  id="button_registro" class="btn btn-outline-primary btn-block"  href="{{ route ('admin.createCategoria') }}" role="button">
         <i class="fas fa-sign-in-alt"></i>
-          CREAR UNA CATEGORÍA
+          CREAR UNA CATEGORÍA,pero esta vista se va a deshabilitar
         </a>
         <a  id="button_cancelar" class="btn btn-outline-primary btn-block"  href="{{ route ('admin.consultartCategorias') }}" role="button">
         <i class="fas fa-sign-in-alt"></i>
-         LISTA DE  CATEGORÍAS
+         LISTADO DE CATEGORIAS
+        </a>
+        <a  id="button_cancelar" class="btn btn-outline-primary btn-block"  href="{{ route ('admin.prueba') }}" role="button">
+        <i class="fas fa-sign-in-alt"></i>
+          PREVISUALIZACIÓN DE LA EVALUACIÓN DOCENTE
         </a>
       </div>
 
@@ -126,11 +131,11 @@
         <h4 class="text-center">PREGUNTAS</h4>
         <a  id="button_cancelar" class="btn btn-outline-primary btn-block"  href="{{ route ('admin.createPregunta') }}"role="button">
         <i class="fas fa-sign-in-alt"></i>
-          CREAR PREGUNTAS
+          CREACIÓN DE PREGUNTAS
         </a>
         <a  id="button_cancelar" class="btn btn-outline-primary btn-block" href="{{ route ('admin.consultartPreguntas') }}" role="button">
         <i class="fas fa-sign-in-alt"></i>
-          EDITAR PREGUNTAS
+          LISTADO DE PREGUNTAS
         </a>
       </div>
   </div>

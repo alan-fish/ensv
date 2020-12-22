@@ -104,68 +104,50 @@
         </div>
       </div>
     </nav>
+<br>
+<br>
+<br>
+<div class="container" id="container-resgistroalumno">
+<script src="{{ asset('js/show_questions.js') }}"></script>
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
 
-<div class="container" id="container-evaluación">
-    <div class="row justify-content-md-center">
-        <div class="col-md-10">
-          
-            <h2><B>PREGUNTAS DE EVALUACIÓN DOCENTE ENSV</B></h2>
-            <nav>
-                  <form id="busqueda" class="form-inline"  method="get" action="{{ route('admin.consultartPreguntas') }}" role="search">
-                      <select name="Buscar_Categoria" class=" form-control custom-select">
-                          <option selected="true" disabled="disabled">CATEGORIA</option>
-                          @foreach($SeletCategorias as $SeletCategorias)
-                          <option value="{{$SeletCategorias->id}}">
-                          {{$SeletCategorias->categoria}}
-                          </option>
-                          @endforeach
-                      </select>                   
-                      <button id="button_busqueda" class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-                          <i class="fas fa-search"></i> Buscar
-                      </button>
-                      <a id="button_busqueda"  class="float-right btn btn-outline-primary" href="{{ route('admin.consultartPreguntas') }}" role="button">
-                          <i class="fas fa-redo"></i> Refrescar 
-                      </a>
-                  </form>
-              </nav>
-            
-            @if(isset($preguntas)) 
+      <h2><B>Preguntas ENSV</B></h2>
 
-            <table class="table-responsive table table-hover">
-                <thead>
-                    <th>CATEGORIA</th>
-                    <th>PREGUNTA</th>
-                    <th>ACCIONES</th>
-                </thead>
-                    <tbody>
-                    @foreach($preguntas as $pregunta )
-                        
-                        <tr>
-                            <td>
-                                {{ $pregunta -> categoria}}
-                            </td>
-                            <td>
-                                {{ $pregunta -> pregunta}}
-                            </td>
-                         
-                            <td>
-                            <a style="width:90px; margin-bottom: 5px;" href="{{ route('admin.editPregunta', $pregunta->id) }}" class="btn btn-warning btn-sm"> 
-                                <i class="fas fa-edit"></i> Editar
-                            </a>
-                            <a style="width:90px" href="{{ route('admin.deletePregunta', $pregunta->id)}}" 
-                               onclick="return confirm('¿Quieres eliminar esta materia?')" 
-                               class="btn btn-danger btn-sm"><i class="fas fa-window-close"></i> 
-                               Eliminar
-                            </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-            </table>  
-            {{ $preguntas->appends(request()->query())->links()}} 
-            @endif 
-        </div>
+      <div class="card-body">
+        <form method="post" action="{{ route('admin.stortePrueba') }}">
+          {{ csrf_field() }}
+          @foreach($evaluar as $ev)
+            <div id="div_registro"  class="form-group row">
+              
+              <label for="" class="col-form-label col-md-4">{{ $ev-> pregunta}}</label>                   
+              <div  class="col-sm-4">       
+                <select name="{{ $ev-> pregunta}}" class="custom-select">
+                  <option value="">Selecciona una respuesta</option>
+                  <option value="">5</option>
+                  <option value="">4</option>
+                  <option value="">3</option>
+                  <option value="">2</option>
+                  <option value="">1</option>
+                </select>             
+              </div>
+            </div>
+          @endforeach
+          <div id="div_registro">
+                    <a  id="button_registro" class=" form-control btn btn-outline-primary col-sm-4 mx-1"  href="" role="button" type="submit">
+                       <input id="suma" type="text">
+                    </a> 
+                    <button id="button_registro" class="btn btn-outline-primary col-sm-4 " type="submit">
+                    CONTINUAR <i class="fas fa-arrow-right"></i>
+                    </button>    
+                </div>
+          <br>
+        </form> 
+      </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
 @endsection

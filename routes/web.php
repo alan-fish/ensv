@@ -39,8 +39,10 @@ Route::get('/admin/list', 'Admin\AdminController@list')->name('admin.list');
 Route::get('/admin/{id}/edit-docente', 'Admin\AdminController@edit_docente')->name('admin.edit_docente');
 Route::put('/admin/{id}/edit-docente', 'Admin\AdminController@update_docente')->name('admin.update_docente');
 //Rutas para la creación de los horarios
+
 //Creación del horario
 Route::get('/admin/materias/{id}/{string}', 'Admin\AdminController@getMaterias');
+
 Route::get('/admin/horario', 'Admin\AdminController@horario')->name('admin.horario');
 Route::post('/admin/horario', 'Admin\AdminController@createhorario')->name('admin.horario_store');
 //Consultar horario
@@ -80,6 +82,9 @@ Route::get('/admin/{id}/borrarMateria', 'Admin\AdminController@borrarMateria')->
 //Evaluación Docente
 Route::get('/admin/evaluacion', 'Admin\AdminController@evaluacion')->name('admin.evaluacion');
 
+Route::get('/admin/prueba', 'Admin\AdminController@prueba')->name('admin.prueba');
+Route::post('/admin/prueba', 'Admin\AdminController@storePrueba')->name('admin.stortePrueba');
+
 //Crear categorias
 Route::get('/admin/evaluacion/crear/categoria', 'Admin\AdminController@createCategoria')->name('admin.createCategoria');
 Route::post('/admin/evaluacion/crear/categoria', 'Admin\AdminController@storeCategoria')->name('admin.storeCategoria');
@@ -117,8 +122,35 @@ Route::get('/alumno/menualumno', 'Alumno\AlumnoController@menu')->name('alumno.m
 Route::get('/alumno/perfil-alumno', 'Alumno\AlumnoController@perfil')->name('alumno.perfil');
 Route::get('/alumno/{id}/perfil-alumno', 'Alumno\AlumnoController@perfilAlumno')->name('alumno.perfilAlumno');
 //Ruta del horario
-Route::get('/alumno/{id}/horario', 'Alumno\AlumnoController@horarioAlumno')->name('alumno.horarioAlumno');
+Route::get('/alumno/{id}/horario/{lic?}', 'Alumno\AlumnoController@horarioAlumno')->name('alumno.horarioAlumno');
 
+
+//Evaluación docente 
+//Lista de docentes conforme al horario de cada alumno
+Route::get('/alumno/evaluacion/{id}/docentes/{licenciatura}', 'Alumno\AlumnoController@evaluacion')->name('alumno.evaluacion');
+//Los cuetionarios de acuerdo a las 5 categorías
+//Categoría1
+Route::get('/alumno/evaluacion/{id}/preguntas/{grupo}', 'Alumno\AlumnoController@evaluacionDocente')->name('alumno.evaluarDocente');
+Route::post('/alumno/evaluacion/preguntas', 'Alumno\AlumnoController@storeEvaluacionDocente')->name('alumno.storeEvaluacion');
+//Categoría 2
+Route::get('/alumno/evaluacion/preguntas2', 'Alumno\AlumnoController@evaluacionDocente2')->name('alumno.evaluarDocente2');
+Route::post('/alumno/evaluacion/preguntas2', 'Alumno\AlumnoController@storeEvaluacionDocente2')->name('alumno.storeEvaluacion2');
+//Categoría 3
+Route::get('/alumno/evaluacion/preguntas3', 'Alumno\AlumnoController@evaluacionDocente3')->name('alumno.evaluarDocente3');
+Route::post('/alumno/evaluacion/preguntas3', 'Alumno\AlumnoController@storeEvaluacionDocente3')->name('alumno.storeEvaluacion3');
+//Categoría 4
+Route::get('/alumno/evaluacion/preguntas4', 'Alumno\AlumnoController@evaluacionDocente4')->name('alumno.evaluarDocente4');
+Route::post('/alumno/evaluacion/preguntas4', 'Alumno\AlumnoController@storeEvaluacionDocente4')->name('alumno.storeEvaluacion4');
+//Categoría 5
+Route::get('/alumno/evaluacion/preguntas5', 'Alumno\AlumnoController@evaluacionDocente5')->name('alumno.evaluarDocente5');
+Route::post('/alumno/evaluacion/preguntas5', 'Alumno\AlumnoController@storeEvaluacionDocente5')->name('alumno.storeEvaluacion5');
+
+//Estas rutas son para cargar dinamicamente las preguntas de cada categoría
+Route::get('/alumno/preguntas', 'Alumno\AlumnoController@getPreguntas');
+Route::get('/alumno/preguntas2', 'Alumno\AlumnoController@getPreguntas2');
+Route::get('/alumno/preguntas3', 'Alumno\AlumnoController@getPreguntas3');
+Route::get('/alumno/preguntas4', 'Alumno\AlumnoController@getPreguntas4');
+Route::get('/alumno/preguntas5', 'Alumno\AlumnoController@getPreguntas5');
 });
 
 //Docente

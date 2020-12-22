@@ -1,8 +1,6 @@
 @extends('layouts.mainalumno')
 
 @section('content')
-
-
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -54,53 +52,46 @@
         </div>
      </nav>
 
-<link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
-<script src="{{ asset('js/horariojs.js') }}"></script>
-<script src="{{ asset('js/menus.js') }}"></script>
-<h1>MENÚ ALUMNO</h1>
+<div class="container"  onload="cuestionario5();">
+<script src="{{ asset('js/preguntas5.js') }}"></script>
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
 
-<div class="accordion">
+        <div class="card-body">
+            <form method="post" action="{{ route('alumno.storeEvaluacion5') }}" >
+                {{ csrf_field() }}
 
-  <div class="accordion-item">
-    <div class="accordion-item-header">
-      <img src="{{ URL::to('assets\img\perfil.png') }}"  alt="" width="70" height="70" />
-      PERFIL
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a"class="btn btn-lg btn-block" href="{{ route('alumno.perfilAlumno', Auth::user()->id) }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>VER PERFIL
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <div class="accordion-item">
-    <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\horario.png') }}"  alt="" width="70" height="70" />
-      HORARIO
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id]     ),  }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>  CONSULTAR HORARIO
-        </a>    
-      </div>
-    </div>
-  </div>
+                <div id="div_registro" class="form-group row">
+                    <div id="labels" class="col-sm-8 row"></div>
+                    <div  id='selects' class="col-sm-4 row"></div>
+                </div>
 
-  <div class="accordion-item">
-    <div class="accordion-item-header"> <img src="{{ URL::to('assets\img\evaluacion.png') }}"  alt="" width="70" height="70" />
-      EVALUACIÓN DOCENTE
-    </div>
-    <div class="accordion-item-body">
-      <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE
-        </a>
-        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.evaluacion',[Auth::user()->grupo_id, Auth::user()->licenciatura_id] ) }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE 1
-        </a>    
-      </div>
+                <div id="div_registro" class="form-group row" hidden>
+                    <div class="col-sm-8">
+                        <input id="registro-input" class="form-control" type="text" name="grupo_id" value='{{ Auth::user()->grupo_id }}' >
+                        @if(empty($resultadoExistente))
+                        <input id="registro-input" class="form-control" type="text" name="resultadoAnterior" value='{{ $resultadoTemporal}}' >
+                        @endif 
+                        @if(!empty($resultadoExistente))  
+                        <input id="registro-input" class="form-control" type="text" name="resultadoAnterior" value='{{ $resultadoExistente->resultado }}' >
+                        @endif
+                    </div>
+                </div>
+       
+                <div id="div_registro" class="form-group row" >
+                    <div class="col-sm-8" hidden>
+                        <input id="registro-input" class="form-control"  role="select" type="text" name="docente_id" value='{{ $docente}}' >
+                    </div>
+                    <button id="button_registro" class="btn btn-outline-primary col-sm-4 " type="submit">
+                        CONTINUAR <i class="fas fa-arrow-right"></i>
+                        <a  id="button_cancelar"   href="" role="button"></a>   
+                    </button> 
+                </div>
+         
+            </form> 
+        </div>
+
     </div>
   </div>
 </div>
