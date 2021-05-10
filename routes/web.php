@@ -124,6 +124,8 @@ Route::get('/alumno/{id}/perfil-alumno', 'Alumno\AlumnoController@perfilAlumno')
 //Ruta del horario
 Route::get('/alumno/{id}/horario/{lic?}', 'Alumno\AlumnoController@horarioAlumno')->name('alumno.horarioAlumno');
 
+//Aquí debo de colocar un middleware para verificar si el alumno realizo o no su evaluación docente
+
 
 //Evaluación docente 
 //Lista de docentes conforme al horario de cada alumno
@@ -151,6 +153,8 @@ Route::get('/alumno/preguntas2', 'Alumno\AlumnoController@getPreguntas2');
 Route::get('/alumno/preguntas3', 'Alumno\AlumnoController@getPreguntas3');
 Route::get('/alumno/preguntas4', 'Alumno\AlumnoController@getPreguntas4');
 Route::get('/alumno/preguntas5', 'Alumno\AlumnoController@getPreguntas5');
+
+
 });
 
 //Docente
