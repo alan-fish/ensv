@@ -2,6 +2,9 @@
 
 @section('content')
 
+<br><br><br><br>
+<br><br>
+
 <div class="container"  id="container-password">
     <div class="row justify-content-md-center">
         <div class="col-md-8">

@@ -28,7 +28,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('alumno.horarioAlumno',Auth::user()->grupo_id) }}">
+                <a class="nav-link" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id] ),  }}">
                 <b>HORARIO</b>  
                 </a>
                 </li>
@@ -81,7 +81,7 @@
     </div>
     <div class="accordion-item-body">
       <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id]     ),  }}" role="button">
+        <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id] ),  }}" role="button">
           <i class="fas fa-sign-in-alt"></i>  CONSULTAR HORARIO
         </a>    
       </div>
@@ -94,11 +94,8 @@
     </div>
     <div class="accordion-item-body">
       <div class="accordion-item-body-content">
-        <a id="button_a" class="btn btn-lg btn-block" href="" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE
-        </a>
         <a id="button_a" class="btn btn-lg btn-block" href="{{ route('alumno.evaluacion',[Auth::user()->grupo_id, Auth::user()->licenciatura_id] ) }}" role="button">
-          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE 1
+          <i class="fas fa-sign-in-alt"></i>  EVALUACIÓN DOCENTE
         </a>    
       </div>
     </div>

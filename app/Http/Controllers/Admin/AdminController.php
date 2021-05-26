@@ -102,7 +102,7 @@ class AdminController extends Controller
             return view('/admin/lista-alumno',['grupos' => $grupos])->with('alumnos', $alumnos);
         }
         if((isset ($grupo))){
-            $alumnos = Alumno::grupos($grupo)->paginate(4);
+            $alumnos = Alumno::grupos($grupo)->paginate(10);
             return view('/admin/lista-alumno',['grupos' => $grupos])->with('alumnos', $alumnos);
         }
         return view('/admin/lista-alumno',['grupos' => $grupos]);
@@ -233,20 +233,48 @@ class AdminController extends Controller
 
     public function createhorario(AdminHorarioRequest $request)
     {   
+        $verificar = request()->all();
 
-        $horario = request()->all();
+        $licenciatura = $verificar ['licenciatura_id'];
+        $ciclo = $verificar ['ciclo_id'];
+        $grupo = $verificar ['grupo_id'];
+        $dia = $verificar ['dia'];
+        $hora = $verificar ['hora'];
+        $materia = $verificar ['materia_id'];
+        $docente = $verificar ['docente_id'];
+
+        $verficarHorario = horario::join('licenciaturas', 'horarios.licenciatura_id', '=', 'licenciaturas.id')
+                                    ->join('ciclos', 'horarios.ciclo_id', '=', 'ciclos.id')
+                                    ->join('grupos', 'horarios.grupo_id', '=', 'grupos.id')
+                                    ->join('materias', 'horarios.materia_id', '=', 'materias.id')
+                                    ->join('docentes', 'horarios.docente_id', '=', 'docentes.id')
+                                    ->where ('licenciaturas.id', '=', $licenciatura)
+                                    ->where ('ciclos.id', '=', $ciclo)
+                                    ->where ('grupos.id', '=', $grupo)
+                                    ->where ('horarios.dia', '=', $dia)
+                                    ->where ('horarios.hora', '=', $hora)
+                                    ->where ('materias.id', '=', $materia)
+                                    ->where ('docentes.id', '=', $docente)
+                                    ->get();
         
-        horario::create([
-           'licenciatura_id' => $horario ['licenciatura_id'],
-           'ciclo_id' => $horario ['ciclo_id'],
-           'grupo_id' => $horario ['grupo_id'],
-           'dia' => $horario ['dia'],
-           'hora' => $horario ['hora'],
-           'materia_id' => $horario ['materia_id'],
-           'docente_id' => $horario ['docente_id'],
-        ]);
+        if ($verficarHorario === null) {      
+            $horario = request()->all();
+        
+            horario::create([
+               'licenciatura_id' => $horario ['licenciatura_id'],
+               'ciclo_id' => $horario ['ciclo_id'],
+               'grupo_id' => $horario ['grupo_id'],
+               'dia' => $horario ['dia'],
+               'hora' => $horario ['hora'],
+               'materia_id' => $horario ['materia_id'],
+               'docente_id' => $horario ['docente_id'],
+            ]);
+            return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
+        }                     
+        else{
+            return redirect()->route('admin.horario')->with('horarioRepetido', '¡Ya exite un horario con estos datos, por favor verificalos!');
+        }  
 
-        return redirect()->route('admin.horario')->with('info', '¡Horario creado exitosamente!');
     }
 
     public function consultarhorario(Request $request)
@@ -263,7 +291,7 @@ class AdminController extends Controller
         $data = [$cic, $grp, $carrera];
         $horarios = Horario::horarios($data)
                     ->orderBy('id')
-                    ->paginate(5);
+                    ->paginate(4);
         return view ('admin.consultarhorario',['ciclos'=> $ciclos, 'grupos' => $grupos, 'licenciaturas'=> $licenciaturas])
                     ->with('horarios', $horarios);
         }

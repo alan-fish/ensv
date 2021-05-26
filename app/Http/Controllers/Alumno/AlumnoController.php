@@ -399,7 +399,7 @@ class AlumnoController extends Controller
                         'grupo_id' => $data['grupo_id'],
                         'docente_id' => $data['docente_id'],
                         ]);
-            //Si se crea se debe de hacer una preconsulta de la siguiente categoría pasa saber si dicha categoria
+            //Si se crea se debe de hacer una preconsulta de la siguiente categoría para saber si dicha categoria
             //Ya tienen una evaluación hecha
             $resultadoExistente = Resultado::join('categorias', 'resultados.categoria_id', '=', 'categorias.id')
                             ->join('ciclos', 'resultados.ciclo_id', '=', 'ciclos.id' )

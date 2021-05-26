@@ -26,7 +26,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('alumno.horarioAlumno',Auth::user()->grupo_id) }}">
+                <a class="nav-link" href="{{ route('alumno.horarioAlumno', [Auth::user()->grupo_id, Auth::user()->licenciatura_id] ),  }}">
                 <b>HORARIO</b>  
                 </a>
                 </li>

@@ -114,7 +114,14 @@
                 {{session('info')}}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>                              
-            @endif   
+            @endif  
+
+            @if(session('horarioRepetido'))  
+            <div  class="alert alert-primary alert-dismissible fade show">
+                {{session('horarioRepetido')}}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>                              
+            @endif    
         
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal"><b>CREAR HORARIO</b></h4>
