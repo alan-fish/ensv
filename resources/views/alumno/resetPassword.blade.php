@@ -11,7 +11,12 @@
                 <h3 style="font-weight: bold">Recuperación de contraseña</h3>
             </div>          
             <div class="card-body">
-
+                        @if(session('infoNoEncontrada'))  
+                            <div  class="alert alert-danger alert-dismissible fade show">
+                                {{session('infoNoEncontrada')}}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        @endif
                         @include ('layouts.error')
                         <h4>Ingrese los datos para validar su información</h4>
                         <br>

@@ -31,15 +31,41 @@ class AlumnosRestablercerContrasenaController extends Controller
         $data = request()->all();
         $data['confirmation_code']= str_random(25);
 
-        Alumno::where('email', '=', $data['email'])
+        $verficarAlumno = Alumno::where('email', '=', $data['email'])
+                        ->select ('alumnos.email')
+                         ->get();
+
+        $verficarAlumno1 = Alumno::where('curp', '=', $data['curp']  )
+                        ->select ('alumnos.curp')
+                        ->get();
+                         
+        $correo = count($verficarAlumno);
+        $cu = count($verficarAlumno1);
+        
+        if ( $correo == 1 && $cu == 1 ) { 
+
+                Alumno::where('email', '=', $data['email'])
                 ->where('curp', '=', $data['curp'])
                 ->update(['confirmation_code' => $data['confirmation_code'],  
                  ]);
+                Mail::send('emails.restablecerContrasena',$data ,function($message) use ($data){
+                $message->to($data['email'])->subject('Recuperación de contraseña');
+                });
+                return redirect()->route('alumno.login')->with('info', 'Enlace de restablecimiento de contraseña enviado');
+        }
+        else{
 
-        Mail::send('emails.restablecerContrasena',$data ,function($message) use ($data){
-        $message->to($data['email'])->subject('Recuperación de contraseña');
-    });
-        return redirect()->route('alumno.login')->with('info', 'Enlace de restablecimiento de contraseña enviado');
+            if ($correo == 0 && $cu == 0){
+                return redirect()->route('alumno.resetablecer')->with('infoNoEncontrada', 'Alumno no encontrado');
+            }
+            if($correo == 0){
+                return redirect()->route('alumno.resetablecer')->with('infoNoEncontrada', 'Correo no registrado');
+            }
+            if($cu == 0){
+                return redirect()->route('alumno.resetablecer')->with('infoNoEncontrada', 'Curp de alumno no encontrada');
+            }
+
+        }  
     }
 
     public function verify($code)
