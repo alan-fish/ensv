@@ -51,19 +51,21 @@
                                 @enderror
                         </div>
 
-                        <div class="">                          
+                        <div class="container-fluid">                          
                             <button type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
                                 Ingresar
-                            </button>
-
-                             <!--    @if (Route::has('password.request'))  -->
-                                    <a class="btn btn-link" href="#">
+                            </button>   
+                                     <a class="btn btn-link" href="{{ route('alumno.resetablecer') }}">
                                         ¿Haz olvidado tu contraseña?
                                     </a>
-                              <!--    @endif -->
-                            </div>
                         </div>
                     </form>
+                    @if(session('info'))  
+                        <div  class="alert alert-success alert-dismissible fade show">
+                        {{session('info')}}
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    @endif
 
                 </div>
             </div>

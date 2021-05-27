@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/admin/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/admin/logout', 'Admin\AdminLoginController@adminLogout')->name('admin.logout');
+//
 //menu
 Route::get('/admin/menu', 'Admin\AdminController@menu')->name('admin.menu');
 //Rutas de admin para el manejo de los datos de los alumnos (crear,editar-actualizar y consultar)
@@ -113,6 +114,15 @@ Route::get('/admin/evaluacion/{id}/borrarPregunta', 'Admin\AdminController@delet
 Route::get('/alumno/login', 'Alumno\AlumnoLoginController@showLoginForm')->name('alumno.login');
 Route::post('/alumno/login', 'Alumno\AlumnoLoginController@login')->name('alumno.login.submit');
 Route::get('/alumno/logout', 'Alumno\AlumnoLoginController@alumnoLogout')->name('alumno.logout');
+
+//Restablecimiento de contraseña
+Route::get('/alumno/resetPassword', 'Alumno\AlumnosRestablercerContrasenaController@getEmail')->name('alumno.resetablecer');
+Route::post('/alumno/resetPassword', 'Alumno\AlumnosRestablercerContrasenaController@postEmail')->name('alumno.restablecer.submit');
+Route::get('/alumno/resetPassword/verify/{code}', 'Alumno\AlumnosRestablercerContrasenaController@verify');
+
+Route::get('/alumno/nuevaContrasena/{code}', 'Alumno\AlumnosRestablercerContrasenaController@resetForm')->name('alumno.reset.form');
+Route::post('/alumno/nuevaContrasena', 'Alumno\AlumnosRestablercerContrasenaController@updatePassword')->name('alumno.reset.update');
+
 //Ruta para el cambio de contraseña obligatorio para el primer inicio de sesión
 Route::get('/alumno/update_password', 'Alumno\AlumnoController@password')->name('alumno.password');
 Route::post('/alumno/update_password', 'Alumno\AlumnoController@updatepassword')->name('alumno.passwordupdate');
